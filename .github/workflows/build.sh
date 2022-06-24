@@ -1,0 +1,1 @@
+mvn verify -P check
