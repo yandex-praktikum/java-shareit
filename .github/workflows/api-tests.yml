@@ -1,0 +1,61 @@
+name: Films API Tests
+
+on:
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Install helper script
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y wget &&
+          wget --no-check-certificate -P /tmp/ https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh &&
+          chmod a+x /tmp/wait-for-it.sh
+
+      - name: Checkout tests
+        uses: actions/checkout@v3
+        with:
+          repository: 'yandex-praktikum/java-shareit'
+          ref: ${{ github.event.pull_request.head.ref }}
+          path: tests
+
+      - name: Check and Build application
+        run: |
+          chmod a+x ./tests/.github/workflows/build.sh
+          ./tests/.github/workflows/build.sh
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Install newman
+        run: |
+          npm install -g newman
+
+      - name: Run Application
+        run: |
+          chmod a+x ./tests/.github/workflows/run.sh
+          ./tests/.github/workflows/run.sh
+
+
+      - name: Waiting for application is up
+        run: |
+          /tmp/wait-for-it.sh -t 60 localhost:8080
+          echo "Application is up"
+
+      - name: Run POSTMAN tests
+        run: |
+          newman run ./tests/postman/sprint.json --delay-request 50 -r cli
