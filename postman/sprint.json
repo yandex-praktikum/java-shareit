@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "948e251a-c1d8-4325-9bd9-38e5dfaa5579",
-		"name": "ShareIt Sprint 1 (add-controllers)",
+		"_postman_id": "e755b522-f7a5-4145-b0ea-ca4abace4d0e",
+		"name": "ShareIt Sprint 2 (add-bookings)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2036415"
 	},
@@ -265,7 +265,7 @@
 									"});",
 									"pm.test(\"Test create user\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.id).to.eql(3);",
 									"    pm.expect(jsonData.email).to.eql('user@user.com');",
 									"    pm.expect(jsonData.name).to.eql('user');",
 									"});"
@@ -534,7 +534,7 @@
 									"});",
 									"pm.test(\"Test get user\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.id).to.eql(3);",
 									"    pm.expect(jsonData.email).to.eql('user@user.com');",
 									"    pm.expect(jsonData.name).to.eql('user');",
 									"});"
@@ -564,7 +564,51 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User get unkonwn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "100"
 								}
 							]
 						}
@@ -608,7 +652,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "3"
 								}
 							]
 						}
@@ -627,7 +671,7 @@
 									"});",
 									"pm.test(\"Test create user\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).to.eql(3);",
+									"    pm.expect(jsonData.id).to.eql(4);",
 									"    pm.expect(jsonData.email).to.eql('user@user.com');",
 									"    pm.expect(jsonData.name).to.eql('user');",
 									"});"
@@ -684,7 +728,7 @@
 									"    pm.expect(jsonData[0].email).to.eql('updateName@user.com');",
 									"    pm.expect(jsonData[0].name).to.eql('updateName');",
 									"",
-									"    pm.expect(jsonData[1].id).to.eql(3);",
+									"    pm.expect(jsonData[1].id).to.eql(4);",
 									"    pm.expect(jsonData[1].email).to.eql('user@user.com');",
 									"    pm.expect(jsonData[1].name).to.eql('user');",
 									"});"
@@ -829,14 +873,14 @@
 					"response": []
 				},
 				{
-					"name": "Item create with not found user",
+					"name": "Item create failed by wrong userId",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 404\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,404]);",
 									"});",
 									""
 								],
@@ -900,7 +944,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -951,7 +995,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1002,7 +1046,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1174,7 +1218,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1411,7 +1455,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
 									"pm.test(\"Test get item\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -1430,7 +1474,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "1",
 								"type": "text"
 							},
 							{
@@ -1452,6 +1496,110 @@
 								{
 									"key": "itemId",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item get from other user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get item\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1);",
+									"    pm.expect(jsonData.name).to.eql('Аккумуляторная дрель');",
+									"    pm.expect(jsonData.description).to.eql('Аккумуляторная дрель + аккумулятор');",
+									"    pm.expect(jsonData.available).to.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item get unknown",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "100"
 								}
 							]
 						}
@@ -1486,7 +1634,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1524,7 +1672,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
 									"pm.test(\"Test get all\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -1566,14 +1714,14 @@
 					"response": []
 				},
 				{
-					"name": "Item get all user 3",
+					"name": "Item get all user 4",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
 									"pm.test(\"Test get all\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -1593,7 +1741,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1704,7 +1852,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1881,7 +2029,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -2021,6 +2169,2266 @@
 								{
 									"key": "text",
 									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bookings",
+			"item": [
+				{
+					"name": "Booking create from user1 to item2 current",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Test create current booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(2, 's');\r",
+									"var end = moment().add(3, 's')\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking set approve by owner current",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test approve current booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1);",
+									"    pm.expect(jsonData.status).to.eql('APPROVED');",
+									"    pm.expect(jsonData.booker.id).to.eql(1);",
+									"    pm.expect(jsonData.item.id).to.eql(2);",
+									"    pm.expect(jsonData.item.name).to.eql('Отвертка');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId?approved=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item update set unavailable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test update available\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.name).to.eql('Отвертка');",
+									"    pm.expect(jsonData.description).to.eql('Аккумуляторная отвертка');",
+									"    pm.expect(jsonData.available).to.false;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"available\": false\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking create from user1 to item1 unavailable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(1, 'd');\r",
+									"var end = moment().add(2, 'd');\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item update set available",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test update available\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.name).to.eql('Отвертка');",
+									"    pm.expect(jsonData.description).to.eql('Аккумуляторная отвертка');",
+									"    pm.expect(jsonData.available).to.true;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"available\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking create failed by wrong userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500, 404]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(1, 'd');\r",
+									"var end = moment().add(2, 'd');\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "100",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking create failed by not found itemId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(1, 'd');\r",
+									"var end = moment().add(2, 'd');\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 200,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking create failed by end in past",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(-2, 'd');\r",
+									"var end = moment().add(1, 'd');\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking create failed by start in past",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(-1, 'd');\r",
+									"var end = moment().add(1, 'd');\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking create from user1 to item2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Test create booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(1, 'd');\r",
+									"var end = moment().add(2, 'd');\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.start).to.eql(pm.environment.get('start'));",
+									"    pm.expect(jsonData.end).to.eql(pm.environment.get('end'));",
+									"    pm.expect(jsonData.status).to.eql('WAITING');",
+									"    pm.expect(jsonData.booker.id).to.eql(1);",
+									"    pm.expect(jsonData.item.id).to.eql(2);",
+									"    pm.expect(jsonData.item.name).to.eql('Отвертка');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking get by owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.start).to.eql(pm.environment.get('start'));",
+									"    pm.expect(jsonData.end).to.eql(pm.environment.get('end'));",
+									"    pm.expect(jsonData.status).to.eql('WAITING');",
+									"    pm.expect(jsonData.booker.id).to.eql(1);",
+									"    pm.expect(jsonData.item.id).to.eql(2);",
+									"    pm.expect(jsonData.item.name).to.eql('Отвертка');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking get all for user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get all user booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.eql(2);",
+									"",
+									"    pm.expect(jsonData[0].id).to.eql(2);",
+									"    pm.expect(jsonData[0].start).to.eql(pm.environment.get('start'));",
+									"    pm.expect(jsonData[0].end).to.eql(pm.environment.get('end'));",
+									"    pm.expect(jsonData[0].status).to.eql('WAITING');",
+									"    pm.expect(jsonData[0].booker.id).to.eql(1);",
+									"    pm.expect(jsonData[0].item.id).to.eql(2);",
+									"    pm.expect(jsonData[0].item.name).to.eql('Отвертка');",
+									"",
+									"    pm.expect(jsonData[1].id).to.eql(1);",
+									"    pm.expect(jsonData[1].status).to.eql('APPROVED');",
+									"    pm.expect(jsonData[1].booker.id).to.eql(1);",
+									"    pm.expect(jsonData[1].item.id).to.eql(2);",
+									"    pm.expect(jsonData[1].item.name).to.eql('Отвертка');",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking get all for owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get all user booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.eql(2);",
+									"",
+									"    pm.expect(jsonData[0].id).to.eql(2);",
+									"    pm.expect(jsonData[0].start).to.eql(pm.environment.get('start'));",
+									"    pm.expect(jsonData[0].end).to.eql(pm.environment.get('end'));",
+									"    pm.expect(jsonData[0].status).to.eql('WAITING');",
+									"    pm.expect(jsonData[0].booker.id).to.eql(1);",
+									"    pm.expect(jsonData[0].item.id).to.eql(2);",
+									"    pm.expect(jsonData[0].item.name).to.eql('Отвертка');",
+									"",
+									"    pm.expect(jsonData[1].id).to.eql(1);",
+									"    pm.expect(jsonData[1].status).to.eql('APPROVED');",
+									"    pm.expect(jsonData[1].booker.id).to.eql(1);",
+									"    pm.expect(jsonData[1].item.id).to.eql(2);",
+									"    pm.expect(jsonData[1].item.name).to.eql('Отвертка');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/owner",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								"owner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking get unkonwn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Other create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Test create other user\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(5);",
+									"    pm.expect(jsonData.email).to.eql('other@other.com');",
+									"    pm.expect(jsonData.name).to.eql('other');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"other\",\n    \"email\": \"other@other.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking get from other user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "5",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking change status fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "5",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking change status by booker",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId?approved=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking set approve by owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test approve booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.status).to.eql('APPROVED');",
+									"    pm.expect(jsonData.booker.id).to.eql(1);",
+									"    pm.expect(jsonData.item.id).to.eql(2);",
+									"    pm.expect(jsonData.item.name).to.eql('Отвертка');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId?approved=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking change status after approve",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId?approved=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking create from user1 to item1 failed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(2, 'd');\r",
+									"var end = moment().add(3, 'd');\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking create from user4 to item1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Test create booking 3\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(3);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(1, 'd');\r",
+									"var end = moment().add(1, 'd').add(1, 'h');\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking set rejected by owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test approve booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(3);",
+									"    pm.expect(jsonData.status).to.eql('REJECTED');",
+									"    pm.expect(jsonData.booker.id).to.eql(4);",
+									"    pm.expect(jsonData.item.id).to.eql(1);",
+									"    pm.expect(jsonData.item.name).to.eql('Аккумуляторная дрель');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId?approved=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "false"
+								}
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item 2 get by user4 with  bookings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Item 2 get by user4 with  bookings\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.name).to.eql('Отвертка');",
+									"    pm.expect(jsonData.description).to.eql('Аккумуляторная отвертка');",
+									"    pm.expect(jsonData.available).to.true;",
+									"    pm.expect(jsonData.lastBooking).not.null;",
+									"    pm.expect(jsonData.lastBooking.id).to.eql(1);",
+									"    pm.expect(jsonData.lastBooking.bookerId).to.eql(1);",
+									"    pm.expect(jsonData.nextBooking).not.null;",
+									"    pm.expect(jsonData.nextBooking.id).to.eql(2);",
+									"    pm.expect(jsonData.nextBooking.bookerId).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item 2 get by user1 without  bookings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Item 2 get by user1 without  bookings\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.name).to.eql('Отвертка');",
+									"    pm.expect(jsonData.description).to.eql('Аккумуляторная отвертка');",
+									"    pm.expect(jsonData.available).to.true;",
+									"    pm.expect(jsonData.lastBooking).null;",
+									"    pm.expect(jsonData.nextBooking).null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item get all user 4 with bookings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get all\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.eql(1);",
+									"    pm.expect(jsonData[0].id).to.eql(2);",
+									"    pm.expect(jsonData[0].name).to.eql('Отвертка');",
+									"    pm.expect(jsonData[0].description).to.eql('Аккумуляторная отвертка');",
+									"    pm.expect(jsonData[0].available).to.true;",
+									"    pm.expect(jsonData[0].lastBooking).not.null;",
+									"    pm.expect(jsonData[0].lastBooking.id).to.eql(1);",
+									"    pm.expect(jsonData[0].lastBooking.bookerId).to.eql(1);",
+									"    pm.expect(jsonData[0].nextBooking).not.null;",
+									"    pm.expect(jsonData[0].nextBooking.id).to.eql(2);",
+									"    pm.expect(jsonData[0].nextBooking.bookerId).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "Item 1 get without comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get item 1 without comments\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1);",
+									"    pm.expect(jsonData.available).to.true;",
+									"    pm.expect(jsonData.comments.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item 2 get without comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get item 2 without comments\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.available).to.true;",
+									"    pm.expect(jsonData.comments.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var time = setTimeout(function(){}, 3000);\r",
+									"// var t = new Date().getTime();\r",
+									"// while (new Date().getTime() < t + 3000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add comment to item 1 without booking failed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							},
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Comment for item 1\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId/comment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add empty comment failed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							},
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId/comment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add comment to item 2 from user1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test add comment to item 2 from user1\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1);",
+									"    pm.expect(jsonData.text).to.eql(\"Add comment from user1\");",
+									"    pm.expect(jsonData.authorName).to.eql(\"updateName\");",
+									"    pm.expect(jsonData.created).not.null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							},
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Add comment from user1\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId/comment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item 2 get by user1 with comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get item 2 by user1  with comments\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.available).to.true;",
+									"    pm.expect(jsonData.lastBooking).null;",
+									"    pm.expect(jsonData.nextBooking).null;",
+									"    pm.expect(jsonData.comments.length).to.eql(1);",
+									"    var comment = jsonData.comments[0];",
+									"    pm.expect(comment.id).to.eql(1);",
+									"    pm.expect(comment.text).to.eql(\"Add comment from user1\");",
+									"    pm.expect(comment.authorName).to.eql(\"updateName\");",
+									"    pm.expect(comment.created).not.null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item 2 get  by user4  with comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get item2 by user4  with comments\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(2);",
+									"    pm.expect(jsonData.available).to.true;",
+									"    pm.expect(jsonData.lastBooking).not.null;",
+									"    pm.expect(jsonData.nextBooking).not.null;",
+									"    pm.expect(jsonData.comments.length).to.eql(1);",
+									"    var comment = jsonData.comments[0];",
+									"    pm.expect(comment.id).to.eql(1);",
+									"    pm.expect(comment.text).to.eql(\"Add comment from user1\");",
+									"    pm.expect(comment.authorName).to.eql(\"updateName\");",
+									"    pm.expect(comment.created).not.null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking future create from user5 to item1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Test create future booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(4);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(10, 'd');\r",
+									"var end = moment().add(11, 'd')\r",
+									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "5",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking set approve by owner future",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test approve future booking\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(4);",
+									"    pm.expect(jsonData.status).to.eql('APPROVED');",
+									"    pm.expect(jsonData.booker.id).to.eql(5);",
+									"    pm.expect(jsonData.item.id).to.eql(1);",
+									"    pm.expect(jsonData.item.name).to.eql('Аккумуляторная дрель');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId?approved=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add comment to item 2 from user5 failed by future booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							},
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "5",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Add comment from user5\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId/comment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "1"
 								}
 							]
 						}
