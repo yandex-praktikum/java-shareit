@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "3f4e7377-eec3-40dd-a9cb-ae696885394e",
-		"name": "Sprint 14 ShareIt (add-bookings)",
+		"_postman_id": "457ca0af-81d2-4bf1-b258-ce8dfd963477",
+		"name": "Sprint 15 ShareIt (add-item-requests)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2036415"
 	},
@@ -9042,7 +9042,7 @@
 					"response": []
 				},
 				{
-					"name": "Item 6 get  by user 4 (owner) without comments",
+					"name": "Item 4 get  by user 6 (owner) without comments",
 					"event": [
 						{
 							"listen": "test",
@@ -9127,6 +9127,1911 @@
 								{
 									"key": "itemId",
 									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "item requests",
+			"item": [
+				{
+					"name": "Add item request with wrong user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,404,403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "99",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Хотел бы воспользоваться щёткой для обуви\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/requests",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add item request with empty description",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/requests",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get own by wrong user id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,404,403]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "99",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get own by user id without requests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list item requests response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 0').to.eql(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get all without pagination params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list item requests response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 0').to.eql(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get all with from = 0 & size = 0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/all?from=0&size=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"all"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get all with from = -1 & size = 20",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/all?from=-1&size=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"all"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "-1"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get all with from = 0 & size = -1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/all?from=0&size=-1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"all"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get all with from = 0 & size = 20 when empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list item requests response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 0').to.eql(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/all?from=0&size=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"all"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add item request 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Has item request create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item request 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test item request 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Хотел бы воспользоваться щёткой для обуви\"').to.eql(\"Хотел бы воспользоваться щёткой для обуви\");",
+									"});",
+									"pm.test(\"Test item request 'created' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('created');",
+									"    pm.expect(jsonData.created, '\"created\" must be not null').is.not.null;",
+									"",
+									"    var current = pm.environment.get('currentDateTime');",
+									"    var created = new Date(jsonData.created);",
+									"    var future = new Date(current);",
+									"    future.setSeconds(future.getSeconds() + 2);",
+									"    pm.expect(created, '\"created\" must be > ' + pm.environment.get('currentDateTime')).to.gte(new Date(current));",
+									"    pm.expect(created, '\"created\"  must be < ' + future).to.lte(future);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');",
+									"",
+									"var start = moment();",
+									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Хотел бы воспользоваться щёткой для обуви\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/requests",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get own by user id with requests empty items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list item requests response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Test item request[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test item request[0] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('description');",
+									"    pm.expect(jsonData[0].description, '\"description\" must be \"Хотел бы воспользоваться щёткой для обуви\"').to.eql(\"Хотел бы воспользоваться щёткой для обуви\");",
+									"});",
+									"pm.test(\"Test item request[0] 'created' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('created');",
+									"    pm.expect(jsonData[0].created, '\"created\" must be not null').is.not.null;",
+									"});",
+									"pm.test(\"Test item request[0] 'items' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('items');",
+									"    pm.expect(jsonData[0].items, '\"items\" must be not null').is.not.null;",
+									"    pm.expect(jsonData[0].items.length, 'items count in total').to.eql(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var time = setTimeout(function(){}, 1000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add item 5 to request 1 from user 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Has item create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Щётка для обуви\"').to.eql('Щётка для обуви');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Стандартная щётка для обуви\"').to.eql('Стандартная щётка для обуви');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test item 'requestId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('requestId');",
+									"    pm.expect(jsonData.requestId, '\"requestId\" must be \"1\"').to.eq(1);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Щётка для обуви\",\n    \"description\": \"Стандартная щётка для обуви\",\n    \"available\": true,\n    \"requestId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get own by user id with requests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list item requests response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Test item request[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test item request[0] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('description');",
+									"    pm.expect(jsonData[0].description, '\"description\" must be \"Хотел бы воспользоваться щёткой для обуви\"').to.eql(\"Хотел бы воспользоваться щёткой для обуви\");",
+									"});",
+									"pm.test(\"Test item request[0] 'created' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('created');",
+									"    pm.expect(jsonData[0].created, '\"created\" must be not null').is.not.null;",
+									"    ",
+									"    var created = new Date(jsonData[0].created);",
+									"    var future = new Date(pm.environment.get('currentDateTime'));",
+									"    pm.expect(created, '\"created\"  must be < ' + pm.environment.get('currentDateTime')).to.lte(future);",
+									"});",
+									"pm.test(\"Test item request[0] 'items' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('items');",
+									"    pm.expect(jsonData[0].items, '\"items\" must be not null').is.not.null;",
+									"    pm.expect(jsonData[0].items.length, 'items count must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].items[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('name');",
+									"    pm.expect(jsonData[0].items[0].name, '\"name\" must be \"Щётка для обуви\"').to.eql('Щётка для обуви');",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('description');",
+									"    pm.expect(jsonData[0].items[0].description, '\"description\" must be \"Стандартная щётка для обуви\"').to.eql('Стандартная щётка для обуви');",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('available');",
+									"    pm.expect(jsonData[0].items[0].available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'requestId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('requestId');",
+									"    pm.expect(jsonData[0].items[0].requestId, '\"requestId\" must be \"1\"').to.eq(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');",
+									"",
+									"var start = moment();",
+									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss.sss'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get all with from = 0 & size = 20 for request owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list item requests response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 0').to.eql(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/all?from=0&size=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"all"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get all with from = 0 & size = 20 for other user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list item requests response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Test item request[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test item request[0] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('description');",
+									"    pm.expect(jsonData[0].description, '\"description\" must be \"Хотел бы воспользоваться щёткой для обуви\"').to.eql(\"Хотел бы воспользоваться щёткой для обуви\");",
+									"});",
+									"pm.test(\"Test item request[0] 'created' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('created');",
+									"    pm.expect(jsonData[0].created, '\"created\" must be not null').is.not.null;",
+									"    ",
+									"    var created = new Date(jsonData[0].created);",
+									"    var future = new Date(pm.environment.get('currentDateTime'));",
+									"    pm.expect(created, '\"created\"  must be < ' + pm.environment.get('currentDateTime')).to.lte(future);",
+									"});",
+									"pm.test(\"Test item request[0] 'items' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('items');",
+									"    pm.expect(jsonData[0].items, '\"items\" must be not null').is.not.null;",
+									"    pm.expect(jsonData[0].items.length, 'items count must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].items[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('name');",
+									"    pm.expect(jsonData[0].items[0].name, '\"name\" must be \"Щётка для обуви\"').to.eql('Щётка для обуви');",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('description');",
+									"    pm.expect(jsonData[0].items[0].description, '\"description\" must be \"Стандартная щётка для обуви\"').to.eql('Стандартная щётка для обуви');",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('available');",
+									"    pm.expect(jsonData[0].items[0].available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test request[0].items[0] 'requestId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].items[0]).to.have.property('requestId');",
+									"    pm.expect(jsonData[0].items[0].requestId, '\"requestId\" must be \"1\"').to.eq(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');",
+									"",
+									"var start = moment();",
+									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss.sss'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/all?from=0&size=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"all"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get by id for wrong user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500, 404, 403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "99",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get by wrong id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/99",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get by id for other user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test item request response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Test item request 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test item request 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Хотел бы воспользоваться щёткой для обуви\"').to.eql(\"Хотел бы воспользоваться щёткой для обуви\");",
+									"});",
+									"pm.test(\"Test item request 'created' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('created');",
+									"    pm.expect(jsonData.created, '\"created\" must be not null').is.not.null;",
+									"",
+									"    var created = new Date(jsonData.created);",
+									"    var future = new Date(pm.environment.get('currentDateTime'));",
+									"    pm.expect(created, '\"created\"  must be < ' + pm.environment.get('currentDateTime')).to.lte(future);",
+									"});",
+									"pm.test(\"Test item request 'items' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('items');",
+									"    pm.expect(jsonData.items, '\"items\" must be not null').is.not.null;",
+									"    pm.expect(jsonData.items.length, 'items count must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test request.items[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('id');",
+									"    pm.expect(jsonData.items[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test request.items[0] 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('name');",
+									"    pm.expect(jsonData.items[0].name, '\"name\" must be \"Щётка для обуви\"').to.eql('Щётка для обуви');",
+									"});",
+									"pm.test(\"Test request.items[0] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('description');",
+									"    pm.expect(jsonData.items[0].description, '\"description\" must be \"Стандартная щётка для обуви\"').to.eql('Стандартная щётка для обуви');",
+									"});",
+									"pm.test(\"Test request.items[0] 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('available');",
+									"    pm.expect(jsonData.items[0].available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test request.items[0] 'requestId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('requestId');",
+									"    pm.expect(jsonData.items[0].requestId, '\"requestId\" must be \"1\"').to.eq(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment();\r",
+									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss.sss'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests get by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test item request response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Test item request 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test item request 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Хотел бы воспользоваться щёткой для обуви\"').to.eql(\"Хотел бы воспользоваться щёткой для обуви\");",
+									"});",
+									"pm.test(\"Test item request 'created' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('created');",
+									"    pm.expect(jsonData.created, '\"created\" must be not null').is.not.null;",
+									"",
+									"    var created = new Date(jsonData.created);",
+									"    var future = new Date(pm.environment.get('currentDateTime'));",
+									"    pm.expect(created, '\"created\"  must be < ' + pm.environment.get('currentDateTime')).to.lte(future);",
+									"});",
+									"pm.test(\"Test item request 'items' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('items');",
+									"    pm.expect(jsonData.items, '\"items\" must be not null').is.not.null;",
+									"    pm.expect(jsonData.items.length, 'items count must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test request.items[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('id');",
+									"    pm.expect(jsonData.items[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test request.items[0] 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('name');",
+									"    pm.expect(jsonData.items[0].name, '\"name\" must be \"Щётка для обуви\"').to.eql('Щётка для обуви');",
+									"});",
+									"pm.test(\"Test request.items[0] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('description');",
+									"    pm.expect(jsonData.items[0].description, '\"description\" must be \"Стандартная щётка для обуви\"').to.eql('Стандартная щётка для обуви');",
+									"});",
+									"pm.test(\"Test request.items[0] 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('available');",
+									"    pm.expect(jsonData.items[0].available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test request.items[0] 'requestId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items[0]).to.have.property('requestId');",
+									"    pm.expect(jsonData.items[0].requestId, '\"requestId\" must be \"1\"').to.eq(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');",
+									"",
+									"var start = moment();",
+									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss.sss'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/requests/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"requests",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagination",
+			"item": [
+				{
+					"name": "Bookings get all with from = 0 & size = 0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings?from=0&size=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings owner get all with from = 0 & size = 0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/owner?from=0&size=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								"owner"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings get all with from = -1 & size = 20",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings?from=-1&size=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "-1"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings owner get all with from = -1 & size = 20",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/owner?from=-1&size=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								"owner"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "-1"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings get all with from = 0 & size = -1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings?from=0&size=-1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings owner get all with from = 0 & size = -1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/owner?from=0&size=-1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								"owner"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings get all with from = 4 & size = 2 when all=5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get all bookings\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
+									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings?from=4&size=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "4"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings owner get all with from = 1 & size = 1 when all=2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get all owner bookings\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'owner bookings count in total').to.eql(1);",
+									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(3);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/owner?from=1&size=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								"owner"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "1"
 								}
 							]
 						}
