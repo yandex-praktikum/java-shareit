@@ -1,1 +1,1 @@
-mvn verify -P check
+mvn verify -P check,coverage
