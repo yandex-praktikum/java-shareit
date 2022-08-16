@@ -1,4 +1,4 @@
-package ru.practicum.shareit.item;
+package ru.practicum.shareit.item.model;
 
 import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
