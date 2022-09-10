@@ -19,7 +19,7 @@ public class ItemRequestController {
     @PostMapping
     public ItemRequestDto create(@RequestHeader(Constants.USER_ID_HEADER) long requestorId,
                                  @RequestBody ItemRequestCreatedDto dto) {
-        if(dto.getDescription() == null) {
+        if (dto.getDescription() == null) {
             throw new BadRequestException("описание не найдено");
         }
         return requestService.create(dto, requestorId);

@@ -36,8 +36,7 @@ public class BookingServiceImpl implements BookingService {
     public List<BookingUpdDto> getAllByBookerId(StateEnum state, long bookerId, int from, int size) {
         userService.getUserById(bookerId);
         LocalDateTime now = LocalDateTime.now();
-        Pageable pageable = PageRequest.of(from/size, size, Sort.by("start"));
-
+        Pageable pageable = PageRequest.of(from / size, size, Sort.by("start"));
 
         switch (state) {
             case PAST:
@@ -66,8 +65,7 @@ public class BookingServiceImpl implements BookingService {
         userService.getUserById(ownerId);
         List<Item> items = itemRepository.getAllByOwnerId(ownerId);
         LocalDateTime now = LocalDateTime.now();
-        Pageable pageable = PageRequest.of(from/size, size, Sort.by("start"));
-
+        Pageable pageable = PageRequest.of(from / size, size, Sort.by("start"));
         if (items == null || items.size() == 0) {
             return new ArrayList<>();
         }
@@ -133,7 +131,7 @@ public class BookingServiceImpl implements BookingService {
         Booking booking;
         Optional<Booking> bookingOptional = bookingRepository.findById(bookingId);
 
-        if(bookingOptional.isPresent()) {
+        if (bookingOptional.isPresent()) {
             booking = bookingOptional.get();
         } else {
             throw new BookingNotFoundException("бронирование не найдено");

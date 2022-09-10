@@ -1,5 +1,6 @@
 package ru.practicum.shareit.bookingTest;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +25,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,7 +46,8 @@ public class BookingMapperTests {
     Item item = new Item();
     User user = new User();
 
-    {
+    @BeforeEach
+    void setModel() {
         item.setId(1L);
         user.setId(1L);
 
@@ -54,7 +57,6 @@ public class BookingMapperTests {
         dto.setItemId(1L);
         dto.setEnd(LocalDateTime.of(2023, 1, 1, 12, 15));
         dto.setStatus(BookingStatus.WAITING);
-
 
         booking.setBooker(user);
         booking.setItem(item);
@@ -75,7 +77,7 @@ public class BookingMapperTests {
     void getBookingDtoFromBookingTest() {
         BookingDto dto1 = mapper.toBookingDto(booking);
 
-        assertEquals(dto1.getId(),booking.getId());
+        assertEquals(dto1.getId(), booking.getId());
         assertEquals(dto1.getBookerId(), booking.getBooker().getId());
         assertEquals(dto1.getItemId(), booking.getItem().getId());
         assertEquals(dto1.getStatus(), booking.getStatus());
