@@ -1,5 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ShareItServer" type="Application" factoryName="Application" nameIsGenerated="true">
+  <configuration default="false" name="ru.practicum.shareit.ShareItServer" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="ALTERNATIVE_JRE_PATH" value="11" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="ru.practicum.shareit.ShareItServer" />
     <module name="shareit-server" />
     <extension name="coverage">

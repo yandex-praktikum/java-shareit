@@ -10,6 +10,7 @@ import ru.practicum.shareit.booking.dto.BookItemRequestDto;
 import ru.practicum.shareit.booking.dto.BookingState;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -25,10 +26,11 @@ public class BookingController {
 
     @GetMapping
     public ResponseEntity<Object> getBookings(@RequestHeader(USER_ID_HEADER) long userId,
-                                              @RequestParam(name = "state", defaultValue = "ALL") BookingState state,
+                                              @RequestParam(name = "state", defaultValue = "ALL") String stateParam,
                                               @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
                                               @Positive @RequestParam(name = "size", defaultValue = "25") Integer size) {
-
+        BookingState state = BookingState.from(stateParam)
+                .orElseThrow(() -> new IllegalArgumentException("Unknown state: " + stateParam));
         log.info("Get booking with state {}, userId={}, from={}, size={}", state, userId, from, size);
         return bookingClient.getBookings(userId, state, from, size);
     }
@@ -50,7 +52,7 @@ public class BookingController {
     @PatchMapping("/{bookingId}")
     public ResponseEntity<Object> update(@RequestHeader(USER_ID_HEADER) long userId,
                                          @PathVariable long bookingId,
-                                         @RequestParam(name = "approved", required = false) Boolean approved) {
+                                         @NotNull @RequestParam (name = "approved", required = false) Boolean approved) {
         log.info("Update booking {}, userId={}", bookingId, userId);
         return bookingClient.update(userId, bookingId, approved);
     }
@@ -59,7 +61,9 @@ public class BookingController {
     public ResponseEntity<Object> getAllWhereOwnerOfItems(@RequestHeader(USER_ID_HEADER) long userId,
                                                           @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") int from,
                                                           @Positive @RequestParam(name = "size", defaultValue = "25") int size,
-                                                          @RequestParam(name = "state", defaultValue = "ALL") BookingState state) {
+                                                          @RequestParam(name = "state", defaultValue = "ALL") String stateParam) {
+        BookingState state = BookingState.from(stateParam)
+                .orElseThrow(() -> new IllegalArgumentException("Unknown state: " + stateParam));
         log.info("Get booking with state {}, userId={}, from={}, size={}", size, userId, from, size);
         return bookingClient.getAllWhereOwnerItems(userId, state, from, size);
     }

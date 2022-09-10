@@ -9,6 +9,7 @@ import ru.practicum.shareit.requests.dto.ItemRequestCreatedDto;
 import ru.practicum.shareit.requests.dto.ItemRequestDto;
 import ru.practicum.shareit.requests.model.ItemRequest;
 
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,19 +32,10 @@ public class ItemRequestMapper {
         return dto;
     }
 
-    public ItemRequest toItemRequestFromDto(ItemRequestDto dto) {
-        ItemRequest request = new ItemRequest();
-        request.setId(dto.getId());
-        request.setDescription(dto.getDescription());
-        request.setRequestor(dto.getRequestor());
-        request.setCreated(dto.getCreated());
-        return request;
-    }
-
     public ItemRequest toItemRequestFromCreateDto(ItemRequestCreatedDto dto) {
         ItemRequest request = new ItemRequest();
         request.setDescription(dto.getDescription());
-        request.setCreated(dto.getCreated());
+        request.setCreated(LocalDateTime.now());
         return request;
     }
 }

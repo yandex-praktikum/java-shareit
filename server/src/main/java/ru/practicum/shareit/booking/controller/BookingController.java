@@ -6,7 +6,6 @@ import ru.practicum.shareit.Constants;
 import ru.practicum.shareit.booking.dto.BookingCreateDto;
 import ru.practicum.shareit.booking.dto.BookingUpdDto;
 import ru.practicum.shareit.booking.model.StateEnum;
-import ru.practicum.shareit.booking.service.BookingMapper;
 import ru.practicum.shareit.booking.service.BookingService;
 import ru.practicum.shareit.exceptions.BadRequestException;
 
@@ -17,7 +16,6 @@ import java.util.Collection;
 @AllArgsConstructor
 public class BookingController {
     private BookingService bookingService;
-    private BookingMapper bookingMapper;
 
     @PostMapping
     public BookingUpdDto create(@RequestBody BookingCreateDto bookingCreateDto,
