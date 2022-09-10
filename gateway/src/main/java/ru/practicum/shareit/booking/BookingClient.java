@@ -44,4 +44,24 @@ public class BookingClient extends BaseClient {
     public ResponseEntity<Object> getBooking(long userId, Long bookingId) {
         return get("/" + bookingId, userId);
     }
+
+    public ResponseEntity<Object> update(long userId, long bookingId, Boolean approved) {
+        Map<String, Object> parameters = Map.of(
+                "approved", approved
+        );
+        return patch("/" + bookingId + "?approved={approved}", userId, parameters);
+    }
+
+    public ResponseEntity<Object> getAllWhereOwnerItems(long userId, BookingState state, int from, int size) {
+        Map<String, Object> parameters = Map.of(
+                "state", state.name(),
+                "from", from,
+                "size", size
+        );
+        return get("/owner/?state={state}&from={from}&size={size}", userId, parameters);
+    }
+
+    public ResponseEntity<Object> deleteBooking(long bookingId) {
+        return delete("/" + bookingId);
+    }
 }
