@@ -37,8 +37,15 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public List<Item> findUserItems(Long userId) {
         return (new ArrayList<>(items.values())).stream()
-                .filter(item -> item.getUserId() == userId).collect(Collectors.toList());
+                .filter(item -> isUserItem(userId, item)).collect(Collectors.toList());
     }
+
+    private boolean isUserItem(Long userId, Item item) {
+        Long itemUserId = item.getUserId();
+        if (userId == null || itemUserId == null) return true;
+        else return userId.equals(itemUserId);
+    }
+
 
     @Override
     public Item find(Long id) {
