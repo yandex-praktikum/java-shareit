@@ -22,10 +22,12 @@ public class UserController {
     public User addUser(@Valid @RequestBody UserDto userDto) {
         return userService.addUser(userDto);
     }
+
     @PatchMapping("/{id}")
     public User updateUser(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
         return userService.updateUser(id, userDto);
     }
+
     @DeleteMapping("/{id}")
     private void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);

@@ -18,7 +18,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item add(Long userId, ItemDto itemDto) {
         validation.itemIsValidAdd(userId, itemDto);
-        Item item = itemMapper.ItemDtoToItem(itemDto);
+        Item item = itemMapper.itemDtoToItem(itemDto);
         item.setUserId(userId);
         return itemRepository.add(item);
     }
