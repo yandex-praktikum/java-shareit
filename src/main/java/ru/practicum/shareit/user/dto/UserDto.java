@@ -6,9 +6,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 
-/**
- * TODO Sprint add-controllers.
- */
 @AllArgsConstructor
 @Getter
 @Setter
