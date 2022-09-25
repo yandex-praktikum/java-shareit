@@ -45,6 +45,7 @@ jobs:
       - name: Install newman
         run: |
           npm install -g newman
+          npm install -g newman-reporter-htmlextra
 
       - name: Run Application
         run: |
@@ -58,5 +59,36 @@ jobs:
           echo "Application is up"
 
       - name: Run POSTMAN tests
+        run: >
+          newman run ./tests/postman/sprint.json 
+          --delay-request 50 -r cli,htmlextra 
+          --verbose --color on --reporter-htmlextra-darkTheme 
+          --reporter-htmlextra-export reports/shareIt.html
+          --reporter-htmlextra-title "Отчет по тестам"
+          --reporter-htmlextra-logs true
+          --reporter-htmlextra-template ./tests/.github/workflows/dashboard-template.hbs
+
+      - name: Compose logs
+        if: ${{ failure() }}
         run: |
-          newman run ./tests/postman/sprint.json --delay-request 50 -r cli --verbose
+          if test -f "docker-compose.yml"; then
+            docker-compose ps
+            docker-compose stop
+            docker-compose logs -f gateway >> ./gateway.log
+            docker-compose logs -f server >> ./server.log
+          fi
+  
+
+      - name: Upload log artifact
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: shareIt_log
+          path: ./*.log
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: postman_tests_report
+          path: reports
