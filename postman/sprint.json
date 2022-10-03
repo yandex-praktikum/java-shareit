@@ -10,7 +10,7 @@
 			"name": "users",
 			"item": [
 				{
-					"name": "User create",
+					"name": "User 1 create",
 					"event": [
 						{
 							"listen": "test",
@@ -74,7 +74,7 @@
 					"response": []
 				},
 				{
-					"name": "User create duplicate email",
+					"name": "User 2 create fail duplicate email",
 					"event": [
 						{
 							"listen": "test",
@@ -209,7 +209,7 @@
 					"response": []
 				},
 				{
-					"name": "User update",
+					"name": "User 1 update",
 					"event": [
 						{
 							"listen": "test",
@@ -280,7 +280,7 @@
 					"response": []
 				},
 				{
-					"name": "User create",
+					"name": "User 3 create",
 					"event": [
 						{
 							"listen": "test",
@@ -296,7 +296,7 @@
 									"pm.test(\"Test user 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData).to.have.property('id');",
-									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(2);",
+									"    pm.expect(jsonData.id, '\"id\" must be 3').to.eql(3);",
 									"});",
 									"pm.test(\"Test user 'email' field\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -344,7 +344,7 @@
 					"response": []
 				},
 				{
-					"name": "User update name",
+					"name": "User 1 update name",
 					"event": [
 						{
 							"listen": "test",
@@ -416,7 +416,7 @@
 					"response": []
 				},
 				{
-					"name": "User update email",
+					"name": "User 1 update email",
 					"event": [
 						{
 							"listen": "test",
@@ -488,7 +488,7 @@
 					"response": []
 				},
 				{
-					"name": "User update with same email",
+					"name": "User 1 update with same email",
 					"event": [
 						{
 							"listen": "test",
@@ -560,7 +560,7 @@
 					"response": []
 				},
 				{
-					"name": "User name update email exists",
+					"name": "User 1 name update fail email exists",
 					"event": [
 						{
 							"listen": "test",
@@ -613,7 +613,7 @@
 					"response": []
 				},
 				{
-					"name": "User get updated",
+					"name": "User 1 get updated",
 					"event": [
 						{
 							"listen": "test",
@@ -676,7 +676,7 @@
 					"response": []
 				},
 				{
-					"name": "User get",
+					"name": "User 3 get",
 					"event": [
 						{
 							"listen": "test",
@@ -692,7 +692,7 @@
 									"pm.test(\"Test user 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData).to.have.property('id');",
-									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"    pm.expect(jsonData.id, '\"id\" must be 3').to.eql(3);",
 									"});",
 									"pm.test(\"Test user 'email' field\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -739,7 +739,7 @@
 					"response": []
 				},
 				{
-					"name": "User get unkonwn",
+					"name": "User 100 get unkonwn",
 					"event": [
 						{
 							"listen": "test",
@@ -783,7 +783,7 @@
 					"response": []
 				},
 				{
-					"name": "User delete",
+					"name": "User 3 delete",
 					"event": [
 						{
 							"listen": "test",
@@ -827,7 +827,7 @@
 					"response": []
 				},
 				{
-					"name": "User create after delete",
+					"name": "User 4 create after delete",
 					"event": [
 						{
 							"listen": "test",
@@ -843,7 +843,7 @@
 									"pm.test(\"Test user 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData).to.have.property('id');",
-									"    pm.expect(jsonData.id, '\"id\" must be 3').to.eql(3);",
+									"    pm.expect(jsonData.id, '\"id\" must be 4').to.eql(4);",
 									"});",
 									"pm.test(\"Test user 'email' field\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -926,7 +926,7 @@
 									"pm.test(\"Test user[1] 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData[1]).to.have.property('id');",
-									"    pm.expect(jsonData[1].id, '\"id\" must be 3').to.eql(3);",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 4').to.eql(4);",
 									"});",
 									"pm.test(\"Test user[1] 'email' field\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -971,7 +971,7 @@
 			"name": "items",
 			"item": [
 				{
-					"name": "Item create",
+					"name": "Item 1 create by user 1",
 					"event": [
 						{
 							"listen": "test",
@@ -1097,14 +1097,14 @@
 					"response": []
 				},
 				{
-					"name": "Item create failed by wrong userId",
+					"name": "Item create with not found user",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 500\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([500,404]);",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404,403]);",
 									"});",
 									""
 								],
@@ -1168,7 +1168,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -1219,7 +1219,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -1270,7 +1270,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -1301,7 +1301,7 @@
 					"response": []
 				},
 				{
-					"name": "item update",
+					"name": "item 1 update",
 					"event": [
 						{
 							"listen": "test",
@@ -1382,7 +1382,7 @@
 					"response": []
 				},
 				{
-					"name": "item update without  X-Sharer-User-Id",
+					"name": "item 1 update without  X-Sharer-User-Id",
 					"event": [
 						{
 							"listen": "test",
@@ -1440,14 +1440,14 @@
 					"response": []
 				},
 				{
-					"name": "item update with other user",
+					"name": "item 1 update with other user 3",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([404, 403]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([500, 404, 403]);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1459,7 +1459,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -1497,7 +1497,7 @@
 					"response": []
 				},
 				{
-					"name": "item update available",
+					"name": "item 1 update available",
 					"event": [
 						{
 							"listen": "test",
@@ -1578,7 +1578,7 @@
 					"response": []
 				},
 				{
-					"name": "item update description",
+					"name": "item 1 update description",
 					"event": [
 						{
 							"listen": "test",
@@ -1659,7 +1659,7 @@
 					"response": []
 				},
 				{
-					"name": "item update name",
+					"name": "item 1 update name",
 					"event": [
 						{
 							"listen": "test",
@@ -1741,7 +1741,7 @@
 					"response": []
 				},
 				{
-					"name": "Item get",
+					"name": "Item 1 get from owner user 1",
 					"event": [
 						{
 							"listen": "test",
@@ -1785,6 +1785,61 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item 1 get from user 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Test get item\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);",
+									"    pm.expect(jsonData.name, '\"name\" field').to.eql('Аккумуляторная дрель');",
+									"    pm.expect(jsonData.description, '\"description\" field').to.eql('Аккумуляторная дрель + аккумулятор');",
+									"    pm.expect(jsonData.available, '\"available\" field').to.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
 								"value": "4",
 								"type": "text"
 							},
@@ -1814,7 +1869,7 @@
 					"response": []
 				},
 				{
-					"name": "Item get unknown",
+					"name": "Item 100 get from user 4",
 					"event": [
 						{
 							"listen": "test",
@@ -1863,7 +1918,7 @@
 					"response": []
 				},
 				{
-					"name": "Item 2 create",
+					"name": "Item 2 create  by user 4",
 					"event": [
 						{
 							"listen": "test",
@@ -1923,6 +1978,81 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"name\": \"Отвертка\",\n    \"description\": \"Аккумуляторная отвертка\",\n    \"available\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item 3 create by user 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Has item create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 3').to.eql(3);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Тюбик суперклея марки Момент\"').to.eql('Тюбик суперклея марки Момент');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Клей Момент\",\n    \"description\": \"Тюбик суперклея марки Момент\",\n    \"available\": true\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/items",
@@ -2019,7 +2149,7 @@
 									"    pm.response.to.be.withBody;",
 									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
 									"});",
 									"",
 									"pm.test(\"Test item[0] 'id' field\", function () {",
@@ -2041,7 +2171,30 @@
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData[0]).to.have.property('available');",
 									"    pm.expect(jsonData[0].available, '\"available\" must be \"true\"').to.true;",
-									"});"
+									"});",
+									"",
+									"",
+									"pm.test(\"Test item[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('id');",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 3').to.eql(3);",
+									"});",
+									"pm.test(\"Test item[1] 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('name');",
+									"    pm.expect(jsonData[1].name, '\"name\" must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									"pm.test(\"Test item[1] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('description');",
+									"    pm.expect(jsonData[1].description, '\"description\" must be \"Тюбик суперклея марки Момент\"').to.eql('Тюбик суперклея марки Момент');",
+									"});",
+									"pm.test(\"Test item[1] 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('available');",
+									"    pm.expect(jsonData[1].available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -2170,7 +2323,7 @@
 					"response": []
 				},
 				{
-					"name": "item update set unavailable",
+					"name": "item 2 update set unavailable",
 					"event": [
 						{
 							"listen": "test",
@@ -2403,7 +2556,7 @@
 					"response": []
 				},
 				{
-					"name": "item update set available",
+					"name": "item 2 update set available",
 					"event": [
 						{
 							"listen": "test",
@@ -2617,23 +2770,39 @@
 			"name": "bookings",
 			"item": [
 				{
-					"name": "item update set unavailable",
+					"name": "item 2 update set unavailable",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test update available\", function () {",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.name, '\"name\" field').to.eql('Отвертка');",
-									"    pm.expect(jsonData.description, '\"description\" field').to.eql('Аккумуляторная отвертка');",
-									"    pm.expect(jsonData.available, '\"available\" field').to.false;",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
 									"});",
-									""
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"false\"').to.false;",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -2682,7 +2851,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking create from user1 to item1 unavailable",
+					"name": "Booking create from user1 to item2 unavailable",
 					"event": [
 						{
 							"listen": "test",
@@ -2748,23 +2917,39 @@
 					"response": []
 				},
 				{
-					"name": "item update set available",
+					"name": "item 2 update set available",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test update available\", function () {",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.name, '\"name\" field').to.eql('Отвертка');",
-									"    pm.expect(jsonData.description, '\"description\" field').to.eql('Аккумуляторная отвертка');",
-									"    pm.expect(jsonData.available, '\"available\" field').to.true;",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
 									"});",
-									""
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -2820,7 +3005,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 500\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([500, 404]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([500, 404, 403]);",
 									"});",
 									""
 								],
@@ -3143,25 +3328,58 @@
 					"response": []
 				},
 				{
-					"name": "Booking create from user1 to item2 current",
+					"name": "Booking 1 create from user 1 to item 2 current",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Status code is 200 or 201\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
-									"pm.test(\"Test create current booking\", function () {",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);",
-									"    pm.expect(jsonData.start, '\"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData.end, '\"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start') + '\"').to.eql(pm.environment.get('start'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end') + '\"').to.eql(pm.environment.get('end'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3227,16 +3445,49 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
-									"pm.test(\"Test approve current booking\", function () {",
+									"pm.test(\"Has booking patch response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData.start, '\"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData.end, '\"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start') + '\"').to.eql(pm.environment.get('start'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end') + '\"').to.eql(pm.environment.get('end'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3282,25 +3533,58 @@
 					"response": []
 				},
 				{
-					"name": "Booking create from user1 to item2",
+					"name": "Booking 2 create from user 1 to item 2",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Status code is 200 or 201\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
-									"pm.test(\"Test create booking\", function () {",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.start, '\"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData.end, '\"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start2') + '\"').to.eql(pm.environment.get('start2'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end2') + '\"').to.eql(pm.environment.get('end2'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3313,8 +3597,8 @@
 									"\r",
 									"var start = moment().add(1, 'd');\r",
 									"var end = moment().add(2, 'd');\r",
-									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
-									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('start2', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end2', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
 									""
 								],
 								"type": "text/javascript"
@@ -3342,7 +3626,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start2}}\",\n    \"end\": \"{{end2}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/bookings",
@@ -3357,7 +3641,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking get",
+					"name": "Booking 2 get by user 1 (booker)",
 					"event": [
 						{
 							"listen": "test",
@@ -3366,16 +3650,49 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
-									"pm.test(\"Test get booking\", function () {",
+									"pm.test(\"Has booking get response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.start, '\"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData.end, '\"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start2') + '\"').to.eql(pm.environment.get('start2'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end2') + '\"').to.eql(pm.environment.get('end2'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3384,12 +3701,6 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var moment = require('moment');",
-									"",
-									"var start = moment().add(1, 'd');",
-									"var end = moment().add(2, 'd');",
-									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));",
-									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));",
 									""
 								],
 								"type": "text/javascript"
@@ -3430,7 +3741,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking get by owner",
+					"name": "Booking 2 get by user 4 (owner)",
 					"event": [
 						{
 							"listen": "test",
@@ -3439,16 +3750,49 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
-									"pm.test(\"Test get owner booking\", function () {",
+									"pm.test(\"Has booking get response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.start, '\"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData.end, '\"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start2') + '\"').to.eql(pm.environment.get('start2'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end2') + '\"').to.eql(pm.environment.get('end2'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3488,14 +3832,14 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for wrong user",
+					"name": "Booking get all for wrong user 100",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 500\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([500,404]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,404,403]);",
 									"});",
 									""
 								],
@@ -3531,14 +3875,14 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for wrong owner user",
+					"name": "Booking get all for wrong owner user 100",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 500\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([500,404]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([500,404,403]);",
 									"});",
 									""
 								],
@@ -3574,34 +3918,100 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for user",
+					"name": "Booking get all for user 1",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get all user booking\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(2);",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].start, 'result[0]: \"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData[0].end, 'result[0]: \"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Отвертка');",
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start2') + '\"').to.eql(pm.environment.get('start2'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end2') + '\"').to.eql(pm.environment.get('end2'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
 									"",
-									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].status, 'result[1]: \"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData[1].booker.id, 'result[1]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].item.id, 'result[1]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[1].item.name, 'result[1]: \"item.name\" field').to.eql('Отвертка');",
-									"",
-									"});"
+									"pm.test(\"Test booking[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('id');",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('start');",
+									"    pm.expect(jsonData[1].start, '\"start\"  must be \"' + pm.environment.get('start') + '\"').to.eql(pm.environment.get('start'));",
+									"});",
+									"pm.test(\"Test booking[1] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('end');",
+									"    pm.expect(jsonData[1].end, '\"end\"  must be \"' + pm.environment.get('end') + '\"').to.eql(pm.environment.get('end'));",
+									"});",
+									"pm.test(\"Test booking[1] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('status');",
+									"    pm.expect(jsonData[1].status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking[1] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('booker');",
+									"    pm.expect(jsonData[1].booker).to.have.property('id');",
+									"    pm.expect(jsonData[1].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('id');",
+									"    pm.expect(jsonData[1].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('name');",
+									"    pm.expect(jsonData[1].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3634,34 +4044,100 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for user by ALL state",
+					"name": "Booking get all for user 1 by ALL state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get user bookings by 'ALL' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(2);",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].start, 'result[0]: \"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData[0].end, 'result[0]: \"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Отвертка');",
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start2') + '\"').to.eql(pm.environment.get('start2'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end2') + '\"').to.eql(pm.environment.get('end2'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
 									"",
-									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].status, 'result[1]: \"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData[1].booker.id, 'result[1]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].item.id, 'result[1]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[1].item.name, 'result[1]: \"item.name\" field').to.eql('Отвертка');",
-									"",
-									"});"
+									"pm.test(\"Test booking[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('id');",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('start');",
+									"    pm.expect(jsonData[1].start, '\"start\"  must be \"' + pm.environment.get('start') + '\"').to.eql(pm.environment.get('start'));",
+									"});",
+									"pm.test(\"Test booking[1] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('end');",
+									"    pm.expect(jsonData[1].end, '\"end\"  must be \"' + pm.environment.get('end') + '\"').to.eql(pm.environment.get('end'));",
+									"});",
+									"pm.test(\"Test booking[1] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('status');",
+									"    pm.expect(jsonData[1].status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking[1] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('booker');",
+									"    pm.expect(jsonData[1].booker).to.have.property('id');",
+									"    pm.expect(jsonData[1].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('id');",
+									"    pm.expect(jsonData[1].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('name');",
+									"    pm.expect(jsonData[1].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3700,36 +4176,110 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for user by FUTURE state",
+					"name": "Booking get all for user 1 by FUTURE state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get user bookings by 'FUTURE' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(2);",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(2);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Отвертка');",
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(new Date(jsonData[0].start), '\"start\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
 									"",
-									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(1);",
-									"    pm.expect(new Date(jsonData[1].start), 'result[1]: \"start\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[1].end), 'result[1]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[1].status, 'result[1]: \"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData[1].booker.id, 'result[1]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].item.id, 'result[1]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[1].item.name, 'result[1]: \"item.name\" field').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(new Date(jsonData[0].end), '\"end\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
 									"",
-									"});"
+									"pm.test(\"Test booking[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('id');",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('start');",
+									"});",
+									"pm.test(\"Test booking[1] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('end');",
+									"});",
+									"pm.test(\"Test booking[1] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('start');",
+									"    pm.expect(new Date(jsonData[1].start), '\"start\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
+									"",
+									"});",
+									"pm.test(\"Test booking[1] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('end');",
+									"    pm.expect(new Date(jsonData[1].end), '\"end\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
+									"});",
+									"pm.test(\"Test booking[1] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('status');",
+									"    pm.expect(jsonData[1].status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking[1] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('booker');",
+									"    pm.expect(jsonData[1].booker).to.have.property('id');",
+									"    pm.expect(jsonData[1].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('id');",
+									"    pm.expect(jsonData[1].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('name');",
+									"    pm.expect(jsonData[1].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3780,7 +4330,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for user by wrong state",
+					"name": "Booking get all for user 1 by wrong state",
 					"event": [
 						{
 							"listen": "test",
@@ -3838,26 +4388,93 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get all owner booking\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(2);",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].start, 'result[0]: \"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData[0].end, 'result[0]: \"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Отвертка');",
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start2') + '\"').to.eql(pm.environment.get('start2'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end2') + '\"').to.eql(pm.environment.get('end2'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
 									"",
-									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].status, 'result[1]: \"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData[1].booker.id, 'result[1]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].item.id, 'result[1]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[1].item.name, 'result[1]: \"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"pm.test(\"Test booking[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('id');",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('start');",
+									"    pm.expect(jsonData[1].start, '\"start\"  must be \"' + pm.environment.get('start') + '\"').to.eql(pm.environment.get('start'));",
+									"});",
+									"pm.test(\"Test booking[1] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('end');",
+									"    pm.expect(jsonData[1].end, '\"end\"  must be \"' + pm.environment.get('end') + '\"').to.eql(pm.environment.get('end'));",
+									"});",
+									"pm.test(\"Test booking[1] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('status');",
+									"    pm.expect(jsonData[1].status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking[1] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('booker');",
+									"    pm.expect(jsonData[1].booker).to.have.property('id');",
+									"    pm.expect(jsonData[1].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('id');",
+									"    pm.expect(jsonData[1].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('name');",
+									"    pm.expect(jsonData[1].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3898,26 +4515,93 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get owner bookings by 'ALL' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(2);",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].start, 'result[0]: \"start\" field').to.eql(pm.environment.get('start'));",
-									"    pm.expect(jsonData[0].end, 'result[0]: \"end\" field').to.eql(pm.environment.get('end'));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Отвертка');",
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start2') + '\"').to.eql(pm.environment.get('start2'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end2') + '\"').to.eql(pm.environment.get('end2'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
 									"",
-									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].status, 'result[1]: \"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData[1].booker.id, 'result[1]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].item.id, 'result[1]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[1].item.name, 'result[1]: \"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"pm.test(\"Test booking[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('id');",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('start');",
+									"    pm.expect(jsonData[1].start, '\"start\"  must be \"' + pm.environment.get('start') + '\"').to.eql(pm.environment.get('start'));",
+									"});",
+									"pm.test(\"Test booking[1] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('end');",
+									"    pm.expect(jsonData[1].end, '\"end\"  must be \"' + pm.environment.get('end') + '\"').to.eql(pm.environment.get('end'));",
+									"});",
+									"pm.test(\"Test booking[1] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('status');",
+									"    pm.expect(jsonData[1].status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking[1] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('booker');",
+									"    pm.expect(jsonData[1].booker).to.have.property('id');",
+									"    pm.expect(jsonData[1].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('id');",
+									"    pm.expect(jsonData[1].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('name');",
+									"    pm.expect(jsonData[1].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3964,28 +4648,103 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get owner bookings by 'FUTURE' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(2);",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(2);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Отвертка');",
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(new Date(jsonData[0].start), '\"start\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
 									"",
-									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(1);",
-									"    pm.expect(new Date(jsonData[1].start), 'result[1]: \"start\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[1].end), 'result[1]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[1].status, 'result[1]: \"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData[1].booker.id, 'result[1]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[1].item.id, 'result[1]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[1].item.name, 'result[1]: \"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(new Date(jsonData[0].end), '\"end\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"",
+									"pm.test(\"Test booking[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('id');",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('start');",
+									"});",
+									"pm.test(\"Test booking[1] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('end');",
+									"});",
+									"pm.test(\"Test booking[1] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('start');",
+									"    pm.expect(new Date(jsonData[1].start), '\"start\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
+									"",
+									"});",
+									"pm.test(\"Test booking[1] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('end');",
+									"    pm.expect(new Date(jsonData[1].end), '\"end\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
+									"});",
+									"pm.test(\"Test booking[1] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('status');",
+									"    pm.expect(jsonData[1].status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking[1] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('booker');",
+									"    pm.expect(jsonData[1].booker).to.have.property('id');",
+									"    pm.expect(jsonData[1].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('id');",
+									"    pm.expect(jsonData[1].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[1] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('item');",
+									"    pm.expect(jsonData[1].item).to.have.property('name');",
+									"    pm.expect(jsonData[1].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4089,7 +4848,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking get unkonwn",
+					"name": "Booking 1000 get from user 4",
 					"event": [
 						{
 							"listen": "test",
@@ -4138,21 +4897,35 @@
 					"response": []
 				},
 				{
-					"name": "User Other create",
+					"name": "User 5 create",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Status code is 200 or 201\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
-									"pm.test(\"Test create other user\", function () {",
+									"pm.test(\"Has user create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test user 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(5);",
-									"    pm.expect(jsonData.email, '\"email\" field').to.eql('other@other.com');",
-									"    pm.expect(jsonData.name, '\"name\" field').to.eql('other');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test user 'email' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData.email, '\"email\" must be \"other@other.com\"').to.eql('other@other.com');",
+									"});",
+									"pm.test(\"Test user 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"other\"').to.eql('other');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4189,7 +4962,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking get from other user",
+					"name": "Booking 1 get from user 5",
 					"event": [
 						{
 							"listen": "test",
@@ -4238,7 +5011,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking change status fail",
+					"name": "Booking 2 change status from user 5 fail",
 					"event": [
 						{
 							"listen": "test",
@@ -4287,7 +5060,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking change status by booker",
+					"name": "Booking 2 change status by user 1 (booker)",
 					"event": [
 						{
 							"listen": "test",
@@ -4342,7 +5115,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking set approve by owner",
+					"name": "Booking 2 set approve by user 4 (owner)",
 					"event": [
 						{
 							"listen": "test",
@@ -4351,14 +5124,49 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
-									"pm.test(\"Test approve booking\", function () {",
+									"pm.test(\"Has booking get response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData.booker.id, '\"booking.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start2') + '\"').to.eql(pm.environment.get('start2'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end2') + '\"').to.eql(pm.environment.get('end2'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4404,7 +5212,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking change status after approve",
+					"name": "Booking 2 change status by user 4 (owner) after approve",
 					"event": [
 						{
 							"listen": "test",
@@ -4459,7 +5267,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking create from user1 to item1 failed",
+					"name": "Booking create from user 1 to item 1 failed",
 					"event": [
 						{
 							"listen": "test",
@@ -4481,8 +5289,8 @@
 									"\r",
 									"var start = moment().add(2, 'd');\r",
 									"var end = moment().add(3, 'd');\r",
-									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
-									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('start3', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end3', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
 									""
 								],
 								"type": "text/javascript"
@@ -4510,7 +5318,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start3}}\",\n    \"end\": \"{{end3}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/bookings",
@@ -4525,19 +5333,58 @@
 					"response": []
 				},
 				{
-					"name": "Booking create from user4 to item1",
+					"name": "Booking 3 create from user 4 to item 1",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Status code is 200 or 201\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
-									"pm.test(\"Test create booking 3\", function () {",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 3').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start3') + '\"').to.eql(pm.environment.get('start3'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end3') + '\"').to.eql(pm.environment.get('end3'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"4\"').to.eql(4);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Аккумуляторная дрель\"').to.eql('Аккумуляторная дрель');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4550,8 +5397,8 @@
 									"\r",
 									"var start = moment().add(1, 'd');\r",
 									"var end = moment().add(1, 'd').add(1, 'h');\r",
-									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
-									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('start3', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end3', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
 									""
 								],
 								"type": "text/javascript"
@@ -4579,7 +5426,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start3}}\",\n    \"end\": \"{{end3}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/bookings",
@@ -4594,23 +5441,58 @@
 					"response": []
 				},
 				{
-					"name": "Booking set rejected by owner",
+					"name": "Booking 3 set rejected by user 1 (owner)",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.expect(pm.response.code).to.be.ok;",
 									"});",
-									"pm.test(\"Test approve booking\", function () {",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(4);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Аккумуляторная дрель');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 3').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start3') + '\"').to.eql(pm.environment.get('start3'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end3') + '\"').to.eql(pm.environment.get('end3'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"REJECTED\"').to.eql('REJECTED');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"4\"').to.eql(4);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Аккумуляторная дрель\"').to.eql('Аккумуляторная дрель');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4656,7 +5538,115 @@
 					"response": []
 				},
 				{
-					"name": "Item 2 get by user4 with  bookings",
+					"name": "Booking 4 create from user 5 to item 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 4').to.eql(4);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start4') + '\"').to.eql(pm.environment.get('start4'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end4') + '\"').to.eql(pm.environment.get('end4'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"5\"').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment().add(1, 'h');\r",
+									"var end = moment().add(2, 'h');\r",
+									"pm.environment.set('start4', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end4', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "5",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 2,\n    \"start\": \"{{start4}}\",\n    \"end\": \"{{end4}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking 4 set approve by user 4 (owner)",
 					"event": [
 						{
 							"listen": "test",
@@ -4665,19 +5655,154 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
-									"pm.test(\"Item 2 get by user4 with  bookings\", function () {",
+									"pm.test(\"Has booking get response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.name, '\"name\" field').to.eql('Отвертка');",
-									"    pm.expect(jsonData.description, '\"description\" field').to.eql('Аккумуляторная отвертка');",
-									"    pm.expect(jsonData.available, '\"available\" field').to.true;",
-									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" field').not.null;",
-									"    pm.expect(jsonData.lastBooking.id, '\"lastBooking.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.lastBooking.bookerId, '\"lastBooking.bookerId\" field').to.eql(1);",
-									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" field').not.null;",
-									"    pm.expect(jsonData.nextBooking.id, '\"nextBooking.id\" field').to.eql(2);",
-									"    pm.expect(jsonData.nextBooking.bookerId, '\"nextBooking.bookerId\" field').to.eql(1);",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 4').to.eql(4);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start4') + '\"').to.eql(pm.environment.get('start4'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end4') + '\"').to.eql(pm.environment.get('end4'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"5\"').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/bookings/:bookingId?approved=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bookings",
+								":bookingId"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item 2 get by user 4 (owner) with  bookings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"",
+									"pm.test(\"Test item 'lastBooking.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking).to.have.property('id');",
+									"    pm.expect(jsonData.lastBooking.id, '\"lastBooking.id\" must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test item 'lastBooking.bookerId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking).to.have.property('bookerId');",
+									"    pm.expect(jsonData.lastBooking.bookerId, '\"lastBooking.bookerId\" must be \"1\"').to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Test item 'nextBooking.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking).to.have.property('id');",
+									"    pm.expect(jsonData.nextBooking.id, '\"nextBooking.id\" must be \"1\"').to.eql(4);",
+									"});",
+									"pm.test(\"Test item 'nextBooking.bookerId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking).to.have.property('bookerId');",
+									"    pm.expect(jsonData.nextBooking.bookerId, '\"nextBooking.bookerId\" must be \"1\"').to.eql(5);",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4727,24 +5852,51 @@
 					"response": []
 				},
 				{
-					"name": "Item 2 get by user1 without  bookings",
+					"name": "Item 2 get by user 1 without  bookings",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Item 2 get by user1 without  bookings\", function () {",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.name, '\"name\" field').to.eql('Отвертка');",
-									"    pm.expect(jsonData.description, '\"description\" field').to.eql('Аккумуляторная отвертка');",
-									"    pm.expect(jsonData.available, '\"available\" field').to.true;",
-									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" field').null;",
-									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" field').null;",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"",
+									"pm.test(\"Test item 'lastBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" must be \"null\"').null;",
+									"});",
+									"pm.test(\"Test item 'nextBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" must be \"null\"').null;",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4784,6 +5936,90 @@
 					"response": []
 				},
 				{
+					"name": "Item 2 get by user 5 without  bookings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"",
+									"pm.test(\"Test item 'lastBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" must be \"null\"').null;",
+									"});",
+									"pm.test(\"Test item 'nextBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" must be \"null\"').null;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "5",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Item get all user 4 with bookings",
 					"event": [
 						{
@@ -4791,30 +6027,93 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get all bookings for user (id = 4)\", function () {",
+									"pm.test(\"Test list item response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'items count in total').to.eql(2);",
-									"    ",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].name, 'result[0]: \"name\" field').to.eql('Отвертка');",
-									"    pm.expect(jsonData[0].description, 'result[0]: \"description\" field').to.eql('Аккумуляторная отвертка');",
-									"    pm.expect(jsonData[0].available, 'result[0]: \"available\" field').to.true;",
-									"    pm.expect(jsonData[0].lastBooking, 'result[0]: \"lastBooking\" field').not.null;",
-									"    pm.expect(jsonData[0].lastBooking.id, 'result[0]: \"lastBooking.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].lastBooking.bookerId, 'result[0]: \"lastBooking.bookerId\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].nextBooking, 'result[0]: \"nextBooking\" field').not.null;",
-									"    pm.expect(jsonData[0].nextBooking.id, 'result[0]: \"nextBooking.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].nextBooking.bookerId, 'result[0]: \"nextBooking.bookerId\" field').to.eql(1);",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+									"});",
 									"",
-									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(3);",
-									"    pm.expect(jsonData[1].name, 'result[1]: \"name\" field').to.eql('Клей Момент');",
-									"    pm.expect(jsonData[1].description, 'result[1]: \"description\" field').to.eql('Тюбик суперклея марки Момент');",
-									"    pm.expect(jsonData[1].available, 'result[1]: \"available\" field').to.true;",
-									"    pm.expect(jsonData[1].lastBooking, 'result[1]: \"lastBooking\" field').is.null;",
-									"    pm.expect(jsonData[1].nextBooking, 'result[1]: \"nextBooking\" field').is.null;",
-									"});"
+									"pm.test(\"Test item[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test item[0] 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('name');",
+									"    pm.expect(jsonData[0].name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item[0] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('description');",
+									"    pm.expect(jsonData[0].description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item[0] 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('available');",
+									"    pm.expect(jsonData[0].available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test item[0] 'lastBooking.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('lastBooking');",
+									"    pm.expect(jsonData[0].lastBooking).to.have.property('id');",
+									"    pm.expect(jsonData[0].lastBooking.id, '\"lastBooking.id\" must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test item[0] 'lastBooking.bookerId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('lastBooking');",
+									"    pm.expect(jsonData[0].lastBooking).to.have.property('bookerId');",
+									"    pm.expect(jsonData[0].lastBooking.bookerId, '\"lastBooking.bookerId\" must be \"1\"').to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Test item[0] 'nextBooking.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('nextBooking');",
+									"    pm.expect(jsonData[0].nextBooking).to.have.property('id');",
+									"    pm.expect(jsonData[0].nextBooking.id, '\"nextBooking.id\" must be \"1\"').to.eql(4);",
+									"});",
+									"pm.test(\"Test item[0] 'nextBooking.bookerId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('nextBooking');",
+									"    pm.expect(jsonData[0].nextBooking).to.have.property('bookerId');",
+									"    pm.expect(jsonData[0].nextBooking.bookerId, '\"nextBooking.bookerId\" must be \"1\"').to.eql(5);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Test item[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('id');",
+									"    pm.expect(jsonData[1].id, '\"id\" must be 3').to.eql(3);",
+									"});",
+									"pm.test(\"Test item[1] 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('name');",
+									"    pm.expect(jsonData[1].name, '\"name\" must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									"pm.test(\"Test item[1] 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('description');",
+									"    pm.expect(jsonData[1].description, '\"description\" must be \"Тюбик суперклея марки Момент\"').to.eql('Тюбик суперклея марки Момент');",
+									"});",
+									"pm.test(\"Test item[1] 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('available');",
+									"    pm.expect(jsonData[1].available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test item[1] 'lastBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('lastBooking');",
+									"    pm.expect(jsonData[1].lastBooking, '\"lastBooking\" must be \"null\"').null;",
+									"});",
+									"pm.test(\"Test item[1] 'nextBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.have.property('nextBooking');",
+									"    pm.expect(jsonData[1].nextBooking, '\"nextBooking\" must be \"null\"').null;",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4847,19 +6146,58 @@
 					"response": []
 				},
 				{
-					"name": "Booking create from user1 to item3 current",
+					"name": "Booking 5 create from user 1 to item 3 current",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Status code is 200 or 201\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
-									"pm.test(\"Test create current booking\", function () {",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start5') + '\"').to.eql(pm.environment.get('start5'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end5') + '\"').to.eql(pm.environment.get('end5'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"3\"').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4872,8 +6210,8 @@
 									"\r",
 									"var start = moment().add(3, 's');\r",
 									"var end = moment().add(1, 'd')\r",
-									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
-									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('start5', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end5', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
 									""
 								],
 								"type": "text/javascript"
@@ -4901,7 +6239,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemId\": 3,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+							"raw": "{\n    \"itemId\": 3,\n    \"start\": \"{{start5}}\",\n    \"end\": \"{{end5}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/bookings",
@@ -4916,27 +6254,61 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for user by WAITING state",
+					"name": "Booking get all for user 1 by WAITING state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get user bookings by 'WAITING' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(4);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(3);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Клей Момент');",
-									"});"
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start5') + '\"').to.eql(pm.environment.get('start5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end5') + '\"').to.eql(pm.environment.get('end5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"3\"').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4987,27 +6359,61 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for owner by WAITING state",
+					"name": "Booking get all for user 4 (owner) by WAITING state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get owner bookings by 'WAITING' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(4);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('WAITING');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(3);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Клей Момент');",
-									"});"
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start5') + '\"').to.eql(pm.environment.get('start5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end5') + '\"').to.eql(pm.environment.get('end5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"3\"').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5059,23 +6465,58 @@
 					"response": []
 				},
 				{
-					"name": "Booking (id=4) set rejected by owner",
+					"name": "Booking 5 set rejected by user 4 (owner)",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
-									"pm.test(\"Test reject booking\", function () {",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(3);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Клей Момент');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start5') + '\"').to.eql(pm.environment.get('start5'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end5') + '\"').to.eql(pm.environment.get('end5'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"REJECTED\"').to.eql('REJECTED');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"3\"').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5113,7 +6554,7 @@
 							"variable": [
 								{
 									"key": "bookingId",
-									"value": "4"
+									"value": "5"
 								}
 							]
 						}
@@ -5121,28 +6562,61 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for user by REJECTED state",
+					"name": "Booking get all for user 1 by REJECTED state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
 									"});",
 									"",
-									"pm.test(\"Test get user bookings by 'REJECTED' state\", function () {",
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
-									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(4);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('REJECTED');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(3);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Клей Момент');",
-									"});"
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start5') + '\"').to.eql(pm.environment.get('start5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end5') + '\"').to.eql(pm.environment.get('end5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"REJECTED\"').to.eql('REJECTED');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"3\"').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5193,28 +6667,61 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for owner by REJECTED state",
+					"name": "Booking get all for user 4 (owner) by REJECTED state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
 									"});",
 									"",
-									"pm.test(\"Test get owner bookings by 'REJECTED' state\", function () {",
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
-									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(4);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('REJECTED');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(3);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Клей Момент');",
-									"});"
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start5') + '\"').to.eql(pm.environment.get('start5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end5') + '\"').to.eql(pm.environment.get('end5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"REJECTED\"').to.eql('REJECTED');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"3\"').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5271,21 +6778,56 @@
 			"name": "comments",
 			"item": [
 				{
-					"name": "Item 1 get without comments",
+					"name": "Item 1 get from user 1 (owner) without comments",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
+									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get item 1 without comments\", function () {",
+									"pm.test(\"Has item create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);",
-									"    pm.expect(jsonData.available, '\"available\" field').to.true;",
-									"    pm.expect(jsonData.comments.length, 'length of \"comments\" field').to.eql(0);",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Аккумуляторная дрель\"').to.eql('Аккумуляторная дрель');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная дрель + аккумулятор\"').to.eql('Аккумуляторная дрель + аккумулятор');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test item 'lastBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" must be \"null\"').null;",
+									"});",
+									"pm.test(\"Test item 'nextBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" must be \"null\"').null;",
+									"});",
+									"pm.test(\"Test item 'comments' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('comments');",
+									"    pm.expect(jsonData.comments.length, 'length of \"comments\" must be \"0\"').to.eql(0);",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5325,21 +6867,56 @@
 					"response": []
 				},
 				{
-					"name": "Item 2 get without comments",
+					"name": "Item 2 get from user 1 without comments",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get item 2 without comments\", function () {",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.available, '\"available\" field').to.true;",
-									"    pm.expect(jsonData.comments.length, 'length of \"comments\" field').to.eql(0);",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test item 'lastBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" must be \"null\"').null;",
+									"});",
+									"pm.test(\"Test item 'nextBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" must be \"null\"').null;",
+									"});",
+									"",
+									"pm.test(\"Test item 'comments' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('comments');",
+									"    pm.expect(jsonData.comments.length, 'length of \"comments\" must be \"0\"').to.eql(0);",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5388,7 +6965,121 @@
 					"response": []
 				},
 				{
-					"name": "Add comment to item 1 without booking failed",
+					"name": "Item 2 get from user 4 (owner) without comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"",
+									"pm.test(\"Test item 'lastBooking.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking).to.have.property('id');",
+									"    pm.expect(jsonData.lastBooking.id, '\"lastBooking.id\" must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test item 'lastBooking.bookerId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking).to.have.property('bookerId');",
+									"    pm.expect(jsonData.lastBooking.bookerId, '\"lastBooking.bookerId\" must be \"1\"').to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Test item 'nextBooking.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking).to.have.property('id');",
+									"    pm.expect(jsonData.nextBooking.id, '\"nextBooking.id\" must be \"1\"').to.eql(4);",
+									"});",
+									"pm.test(\"Test item 'nextBooking.bookerId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking).to.have.property('bookerId');",
+									"    pm.expect(jsonData.nextBooking.bookerId, '\"nextBooking.bookerId\" must be \"1\"').to.eql(5);",
+									"});",
+									"",
+									"pm.test(\"Test item 'comments' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('comments');",
+									"    pm.expect(jsonData.comments.length, 'length of \"comments\" must be \"0\"').to.eql(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var time = setTimeout(function(){}, 3000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Sharer-User-Id",
+								"value": "4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment from user 4 to item 1 without booking failed",
 					"event": [
 						{
 							"listen": "test",
@@ -5447,7 +7138,7 @@
 					"response": []
 				},
 				{
-					"name": "Add empty comment failed",
+					"name": "Comment  from user 1 to item 2 empty failed",
 					"event": [
 						{
 							"listen": "test",
@@ -5506,7 +7197,7 @@
 					"response": []
 				},
 				{
-					"name": "Add comment to item 2 from user1",
+					"name": "Comment 1  from user 1 to item 2",
 					"event": [
 						{
 							"listen": "test",
@@ -5522,6 +7213,18 @@
 									"    pm.expect(jsonData.authorName, '\"authorName\" field').to.eql(\"updateName\");",
 									"    pm.expect(jsonData.created, '\"created\" field').not.null;",
 									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"var start = moment();\r",
+									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss'));"
 								],
 								"type": "text/javascript"
 							}
@@ -5571,28 +7274,76 @@
 					"response": []
 				},
 				{
-					"name": "Item 2 get by user1 with comments",
+					"name": "Item 2 get by user 1 with comments",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get item 2 by user1  with comments\", function () {",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.available, '\"available\" field').to.true;",
-									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" field').null;",
-									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" field').null;",
-									"    pm.expect(jsonData.comments.length, 'length of \"comments\" field').to.eql(1);",
-									"    var comment = jsonData.comments[0];",
-									"    pm.expect(comment.id, '\"id\" field').to.eql(1);",
-									"    pm.expect(comment.text, '\"text\" field').to.eql(\"Add comment from user1\");",
-									"    pm.expect(comment.authorName, '\"authorName\" field').to.eql(\"updateName\");",
-									"    pm.expect(comment.created, '\"created\" field').not.null;",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"pm.test(\"Test item 'lastBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" must be \"null\"').null;",
+									"});",
+									"pm.test(\"Test item 'nextBooking' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" must be \"null\"').null;",
+									"});",
+									"",
+									"pm.test(\"Test item 'comments' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('comments');",
+									"    pm.expect(jsonData.comments.length, 'length of \"comments\" must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test item 'comments[0].id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.comments[0]).to.have.property('id');",
+									"    pm.expect(jsonData.comments[0].id, '\"id\" must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test item 'comments[0].text' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.comments[0]).to.have.property('text');",
+									"    pm.expect(jsonData.comments[0].text, '\"text\" must be \"Add comment from user1\"').to.eql('Add comment from user1');",
+									"});",
+									"pm.test(\"Test item 'comments[0].authorName' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.comments[0]).to.have.property('authorName');",
+									"    pm.expect(jsonData.comments[0].authorName, '\"authorName\" must be \"updateName\"').to.eql(\"updateName\");",
+									"});",
+									"pm.test(\"Test item 'comments[0].created' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.comments[0]).to.have.property('created');",
+									"    pm.expect(new Date(jsonData.comments[0].created), '\"created\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5632,28 +7383,92 @@
 					"response": []
 				},
 				{
-					"name": "Item 2 get  by user4  with comments",
+					"name": "Item 2 get  by user 4 (owner) with comments",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get item2 by user4  with comments\", function () {",
+									"pm.test(\"Has item update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test item 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
-									"    pm.expect(jsonData.available, '\"available\" field').to.true;",
-									"    pm.expect(jsonData.lastBooking, '\"lastBooking\" field').not.null;",
-									"    pm.expect(jsonData.nextBooking, '\"nextBooking\" field').not.null;",
-									"    pm.expect(jsonData.comments.length, 'length of \"comments\" field').to.eql(1);",
-									"    var comment = jsonData.comments[0];",
-									"    pm.expect(comment.id, '\"id\" field').to.eql(1);",
-									"    pm.expect(comment.text, '\"text\" field').to.eql(\"Add comment from user1\");",
-									"    pm.expect(comment.authorName, '\"authorName\" field').to.eql(\"updateName\");",
-									"    pm.expect(comment.created, '\"created\" field').not.null;",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);",
+									"});",
+									"pm.test(\"Test item 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									"pm.test(\"Test item 'description' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData.description, '\"description\" must be \"Аккумуляторная отвертка\"').to.eql('Аккумуляторная отвертка');",
+									"});",
+									"pm.test(\"Test item 'available' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('available');",
+									"    pm.expect(jsonData.available, '\"available\" must be \"true\"').to.true;",
+									"});",
+									"",
+									"pm.test(\"Test item 'lastBooking.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking).to.have.property('id');",
+									"    pm.expect(jsonData.lastBooking.id, '\"lastBooking.id\" must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test item 'lastBooking.bookerId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('lastBooking');",
+									"    pm.expect(jsonData.lastBooking).to.have.property('bookerId');",
+									"    pm.expect(jsonData.lastBooking.bookerId, '\"lastBooking.bookerId\" must be \"1\"').to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Test item 'nextBooking.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking).to.have.property('id');",
+									"    pm.expect(jsonData.nextBooking.id, '\"nextBooking.id\" must be \"1\"').to.eql(4);",
+									"});",
+									"pm.test(\"Test item 'nextBooking.bookerId' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nextBooking');",
+									"    pm.expect(jsonData.nextBooking).to.have.property('bookerId');",
+									"    pm.expect(jsonData.nextBooking.bookerId, '\"nextBooking.bookerId\" must be \"1\"').to.eql(5);",
+									"});",
+									"",
+									"pm.test(\"Test item 'comments' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('comments');",
+									"    pm.expect(jsonData.comments.length, 'length of \"comments\" must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test item 'comments[0].id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.comments[0]).to.have.property('id');",
+									"    pm.expect(jsonData.comments[0].id, '\"id\" must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test item 'comments[0].text' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.comments[0]).to.have.property('text');",
+									"    pm.expect(jsonData.comments[0].text, '\"text\" must be \"Add comment from user1\"').to.eql('Add comment from user1');",
+									"});",
+									"pm.test(\"Test item 'comments[0].authorName' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.comments[0]).to.have.property('authorName');",
+									"    pm.expect(jsonData.comments[0].authorName, '\"authorName\" must be \"updateName\"').to.eql(\"updateName\");",
+									"});",
+									"pm.test(\"Test item 'comments[0].created' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.comments[0]).to.have.property('created');",
+									"    pm.expect(new Date(jsonData.comments[0].created), '\"created\"  must be > \"' + pm.environment.get('currentDateTime') + '\"').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5693,19 +7508,58 @@
 					"response": []
 				},
 				{
-					"name": "Booking future create from user5 to item1",
+					"name": "Booking 6 future create from user 5 to item 1",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Status code is 200 or 201\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
-									"pm.test(\"Test create future booking\", function () {",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(5);",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 6').to.eql(6);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start6') + '\"').to.eql(pm.environment.get('start6'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end6') + '\"').to.eql(pm.environment.get('end6'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"WAITING\"').to.eql('WAITING');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"5\"').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Аккумуляторная дрель\"').to.eql('Аккумуляторная дрель');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5718,8 +7572,8 @@
 									"\r",
 									"var start = moment().add(10, 'd');\r",
 									"var end = moment().add(11, 'd')\r",
-									"pm.environment.set('start', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
-									"pm.environment.set('end', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('start6', start.format('YYYY-MM-DDTHH:mm:ss'));\r",
+									"pm.environment.set('end6', end.format('YYYY-MM-DDTHH:mm:ss'));\r",
 									""
 								],
 								"type": "text/javascript"
@@ -5747,7 +7601,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start}}\",\n    \"end\": \"{{end}}\"\n}"
+							"raw": "{\n    \"itemId\": 1,\n    \"start\": \"{{start6}}\",\n    \"end\": \"{{end6}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/bookings",
@@ -5762,23 +7616,58 @@
 					"response": []
 				},
 				{
-					"name": "Booking set approve by owner future",
+					"name": "Booking 6 set approve by owner future",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
-									"pm.test(\"Test approve future booking\", function () {",
+									"pm.test(\"Has booking create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test booking 'id' field\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(5);",
-									"    pm.expect(jsonData.status, '\"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(5);",
-									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(1);",
-									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Аккумуляторная дрель');",
-									"});"
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 6').to.eql(6);",
+									"});",
+									"pm.test(\"Test booking 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('start');",
+									"    pm.expect(jsonData.start, '\"start\"  must be \"' + pm.environment.get('start6') + '\"').to.eql(pm.environment.get('start6'));",
+									"});",
+									"pm.test(\"Test booking 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('end');",
+									"    pm.expect(jsonData.end, '\"end\"  must be \"' + pm.environment.get('end6') + '\"').to.eql(pm.environment.get('end6'));",
+									"});",
+									"pm.test(\"Test booking 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('booker');",
+									"    pm.expect(jsonData.booker).to.have.property('id');",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\"  must be \"5\"').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('id');",
+									"    pm.expect(jsonData.item.id, '\"item.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('item');",
+									"    pm.expect(jsonData.item).to.have.property('name');",
+									"    pm.expect(jsonData.item.name, '\"item.name\"  must be \"Аккумуляторная дрель\"').to.eql('Аккумуляторная дрель');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5816,7 +7705,7 @@
 							"variable": [
 								{
 									"key": "bookingId",
-									"value": "5"
+									"value": "6"
 								}
 							]
 						}
@@ -5883,27 +7772,61 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for user by CURRENT state",
+					"name": "Booking get all for user 1 by CURRENT state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get user bookings by 'CURRENT' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(4);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.lessThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('REJECTED');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(3);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Клей Момент');",
-									"});"
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start5') + '\"').to.eql(pm.environment.get('start5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end5') + '\"').to.eql(pm.environment.get('end5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"REJECTED\"').to.eql('REJECTED');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"3\"').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5912,10 +7835,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var moment = require('moment');",
-									"",
-									"var start = moment();",
-									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss'));"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5954,27 +7874,61 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for owner by CURRENT state",
+					"name": "Booking get all for user 4 (owner) by CURRENT state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get owner bookings by 'CURRENT' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(4);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.lessThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.greaterThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('REJECTED');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(3);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Клей Момент');",
-									"});"
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start5') + '\"').to.eql(pm.environment.get('start5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end5') + '\"').to.eql(pm.environment.get('end5'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"REJECTED\"').to.eql('REJECTED');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"3\"').to.eql(3);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Клей Момент\"').to.eql('Клей Момент');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -5983,10 +7937,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var moment = require('moment');",
-									"",
-									"var start = moment();",
-									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss'));"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6026,27 +7977,61 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for user by PAST state",
+					"name": "Booking get all for user 1 by PAST state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get user bookings by 'PAST' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.lessThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.lessThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start') + '\"').to.eql(pm.environment.get('start'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end') + '\"').to.eql(pm.environment.get('end'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6055,10 +8040,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var moment = require('moment');",
-									"",
-									"var start = moment();",
-									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss'));"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6097,27 +8079,61 @@
 					"response": []
 				},
 				{
-					"name": "Booking get all for owner by PAST state",
+					"name": "Booking get all for user 4 (owner) by PAST state",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.response.to.be.ok;",
 									"});",
-									"pm.test(\"Test get owner bookings by 'PAST' state\", function () {",
+									"pm.test(\"Test list booking response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length, 'bookings count in total').to.eql(1);",
+									"    pm.expect(jsonData.length, 'List length must be 1').to.eql(1);",
+									"});",
 									"",
-									"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
-									"    pm.expect(new Date(jsonData[0].start), 'result[0]: \"start\" field').to.lessThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(new Date(jsonData[0].end), 'result[0]: \"end\" field').to.lessThan(new Date(pm.environment.get('currentDateTime')));",
-									"    pm.expect(jsonData[0].status, 'result[0]: \"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData[0].booker.id, 'result[0]: \"booker.id\" field').to.eql(1);",
-									"    pm.expect(jsonData[0].item.id, 'result[0]: \"item.id\" field').to.eql(2);",
-									"    pm.expect(jsonData[0].item.name, 'result[0]: \"item.name\" field').to.eql('Отвертка');",
-									"});"
+									"pm.test(\"Test booking[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('id');",
+									"    pm.expect(jsonData[0].id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'start' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('start');",
+									"    pm.expect(jsonData[0].start, '\"start\"  must be \"' + pm.environment.get('start') + '\"').to.eql(pm.environment.get('start'));",
+									"});",
+									"pm.test(\"Test booking[0] 'end' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('end');",
+									"    pm.expect(jsonData[0].end, '\"end\"  must be \"' + pm.environment.get('end') + '\"').to.eql(pm.environment.get('end'));",
+									"});",
+									"pm.test(\"Test booking[0] 'status' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('status');",
+									"    pm.expect(jsonData[0].status, '\"status\" must be \"APPROVED\"').to.eql('APPROVED');",
+									"});",
+									"pm.test(\"Test booking[0] 'booker.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('booker');",
+									"    pm.expect(jsonData[0].booker).to.have.property('id');",
+									"    pm.expect(jsonData[0].booker.id, '\"booker.id\"  must be \"1\"').to.eql(1);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('id');",
+									"    pm.expect(jsonData[0].item.id, '\"item.id\"  must be \"2\"').to.eql(2);",
+									"});",
+									"pm.test(\"Test booking[0] 'item.name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0]).to.have.property('item');",
+									"    pm.expect(jsonData[0].item).to.have.property('name');",
+									"    pm.expect(jsonData[0].item.name, '\"item.name\"  must be \"Отвертка\"').to.eql('Отвертка');",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6126,10 +8142,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var moment = require('moment');",
-									"",
-									"var start = moment();",
-									"pm.environment.set('currentDateTime', start.format('YYYY-MM-DDTHH:mm:ss'));"
+									""
 								],
 								"type": "text/javascript"
 							}
