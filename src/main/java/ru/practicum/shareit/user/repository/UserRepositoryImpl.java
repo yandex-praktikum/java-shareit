@@ -35,11 +35,10 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User update(User user, Long id) {
-        if (user.getEmail() != null & user.getName() != null){userMap.replace(id, user);}
-            else {throw  new DuplicateEmailException("jii");
-        }
-        return userMap.get(id);
+    public User update(User user) {
+        userMap.replace(user.getId(), user);
+        return user;
+//        return userMap.get(user.getId());
     }
 
     @Override
