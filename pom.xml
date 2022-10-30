@@ -12,8 +12,7 @@
 	<groupId>ru.practicum</groupId>
 	<artifactId>shareit</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
-	<name>ShareIt</name>
+	<name>Shareit</name>
 
 	<properties>
 		<java.version>11</java.version>
