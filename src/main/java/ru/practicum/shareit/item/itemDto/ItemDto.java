@@ -1,8 +1,7 @@
-package ru.practicum.shareit.item.model;
+package ru.practicum.shareit.item.itemDto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.NotBlank;
@@ -14,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Slf4j
 @Builder
-public class Item {
+public class ItemDto {
     private Long id;
     @NotBlank
     private String name;

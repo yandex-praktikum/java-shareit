@@ -20,4 +20,7 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     private void handle(final WrongParameterException e){log.error("Ошибка " + e.getMessage());}
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private void handle(final NotFoundException e){log.error("Ошибка " + e.getMessage());}
 }
