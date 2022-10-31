@@ -4,4 +4,6 @@ import ru.practicum.shareit.item.itemDto.ItemDto;
 
 public interface ItemService {
     public ItemDto createItem(ItemDto itemDto, Long userId);
+
+    ItemDto updateItem(ItemDto itemDto, Long userId, Long itemId);
 }
