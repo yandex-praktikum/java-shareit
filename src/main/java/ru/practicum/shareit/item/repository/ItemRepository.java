@@ -10,5 +10,5 @@ public interface ItemRepository {
     void update(Item item);
     Item getById(Long itemID);
 
-    List<Item> getAll();
+    List<Item> getAll(Long userId);
 }
