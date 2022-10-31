@@ -19,4 +19,10 @@ public class ItemController {
     public ItemDto createItem (@RequestHeader("X-Sharer-User-Id") Long userId,@Valid @RequestBody ItemDto itemDto){
         return itemService.createItem(itemDto, userId);
     }
+
+    @PatchMapping("/{id}")
+    public ItemDto update(@RequestBody ItemDto itemDto, @PathVariable Long itemId,
+                          @RequestHeader("X-Sharer-User-Id") Long userId) {
+        return itemService.updateItem(itemDto, itemId, userId);
+    }
 }

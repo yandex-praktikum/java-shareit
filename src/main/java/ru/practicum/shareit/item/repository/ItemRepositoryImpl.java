@@ -1,7 +1,6 @@
 package ru.practicum.shareit.item.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.practicum.shareit.item.itemDto.ItemDto;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.HashMap;
@@ -16,5 +15,15 @@ public class ItemRepositoryImpl implements ItemRepository{
         item.setId(tmpId);
         itemMap.put(tmpId,item);
         return item;
+    }
+    @Override
+    public void update(Item item) {
+        itemMap.put(item.getId(), item);
+
+    }
+    @Override
+    public Item getById(Long itemID){
+        return itemMap.get(itemID);
+
     }
 }
