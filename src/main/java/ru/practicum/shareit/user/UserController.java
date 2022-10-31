@@ -23,7 +23,7 @@ public class UserController {
 
     @PatchMapping("{userId}")
     public Optional<User> update(@PathVariable @Positive (message = "id не может быть отрицательным числом")
-                                 Long userId, @NonNull @RequestBody UserDto userDto){
+                                 Long userId, @NonNull @RequestBody UserDto userDto) {
         return userService.update(userId, userDto);
     }
 

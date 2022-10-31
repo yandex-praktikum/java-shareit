@@ -9,12 +9,12 @@ import ru.practicum.shareit.item.dto.ItemDto;
 public class ItemMapper {
     private Long id = 0L;
 
-    private Long generateId(){
+    private Long generateId() {
         ++id;
         return getId();
     }
 
-    public Item fromItemDto (ItemDto itemDto){
+    public Item fromItemDto(ItemDto itemDto) {
         return new Item(generateId(), itemDto.getName(), itemDto.getDescription(), itemDto.getAvailable());
     }
 }

@@ -9,12 +9,12 @@ import ru.practicum.shareit.user.dto.UserDto;
 public class UserMapper {
     private Long id = 0L;
 
-    private Long generateId(){
+    private Long generateId() {
         ++id;
         return getId();
     }
 
-    public User fromUserDto (UserDto userDto){
+    public User fromUserDto(UserDto userDto) {
         return new User(generateId(), userDto.getName(), userDto.getEmail());
     }
 }

@@ -14,7 +14,6 @@ import java.util.Optional;
 @AllArgsConstructor
 @Component("userInMemoryDao")
 public class UserInMemoryDao implements UserDaoStorage {
-
     private Map<Long,User> users;
     private final UserMapper mapper;
 
@@ -28,7 +27,7 @@ public class UserInMemoryDao implements UserDaoStorage {
     @Override
     public Optional<User> update(Long id, UserDto userDto) {
         Optional<User> updatedUser = getUserById(id);
-        if(updatedUser.isPresent()) {
+        if (updatedUser.isPresent()) {
             users.get(id).setName(userDto.getName());
             users.get(id).setEmail(userDto.getEmail());
             return getUserById(id);
@@ -39,7 +38,7 @@ public class UserInMemoryDao implements UserDaoStorage {
     @Override
     public Optional<User> updateName(Long id, UserNameDto nameDto) {
         Optional<User> updatedUser = getUserById(id);
-        if(updatedUser.isPresent()) {
+        if (updatedUser.isPresent()) {
             users.get(id).setName(nameDto.getName());
             return getUserById(id);
         }
@@ -49,7 +48,7 @@ public class UserInMemoryDao implements UserDaoStorage {
     @Override
     public Optional<User> updateEmail(Long id, UserEmailDto emailDto) {
         Optional<User> updatedUser = getUserById(id);
-        if(updatedUser.isPresent()) {
+        if (updatedUser.isPresent()) {
             users.get(id).setEmail(emailDto.getEmail());
             return getUserById(id);
         }
@@ -58,7 +57,7 @@ public class UserInMemoryDao implements UserDaoStorage {
 
     @Override
     public Optional<User> getUserById(Long id) {
-        for(Long ids : users.keySet()) {
+        for (Long ids : users.keySet()) {
             if (ids.equals(id)) {
                 return Optional.ofNullable(users.get(id));
             }
@@ -74,7 +73,7 @@ public class UserInMemoryDao implements UserDaoStorage {
     @Override
     public void deleteUserById(Long id) {
         Optional<User> user = getUserById(id);
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             users.remove(id, users.get(id));
         }
     }

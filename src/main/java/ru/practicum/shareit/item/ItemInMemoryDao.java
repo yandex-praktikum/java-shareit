@@ -9,15 +9,14 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Component("itemInMemoryDao")
-public class ItemInMemoryDao implements ItemDaoStorage{
-
+public class ItemInMemoryDao implements ItemDaoStorage {
     private Map<Long, List<Item>> userItems;
     private final ItemMapper mapper;
 
     @Override
     public Item create(Long userId, ItemDto dto) {
         Item item = mapper.fromItemDto(dto);
-        if(!userItems.containsKey(userId)) {
+        if (!userItems.containsKey(userId)) {
             userItems.put(userId, new ArrayList<>());
         }
         userItems.get(userId).add(item);
@@ -29,7 +28,7 @@ public class ItemInMemoryDao implements ItemDaoStorage{
         for (Long userIds : userItems.keySet()) {
             if ((userIds.equals(userId))) {
                 for (Item item : userItems.get(userId)) {
-                    if(item.getId().equals(itemId)) {
+                    if (item.getId().equals(itemId)) {
                         itemBuild(item, itemFromRequest);
                         return getItemById(userId, itemId);
                     }
@@ -40,22 +39,21 @@ public class ItemInMemoryDao implements ItemDaoStorage{
     }
 
     private void itemBuild(Item itemForUpdate, Item itemFromRequest) {
-        if(itemFromRequest.getName() != null) {
+        if (itemFromRequest.getName() != null) {
             itemForUpdate.setName(itemFromRequest.getName());
         }
-        if(itemFromRequest.getDescription() != null) {
+        if (itemFromRequest.getDescription() != null) {
             itemForUpdate.setDescription(itemFromRequest.getDescription());
         }
-        if(itemFromRequest.getAvailable() != null) {
+        if (itemFromRequest.getAvailable() != null) {
             itemForUpdate.setAvailable(itemFromRequest.getAvailable());
         }
     }
 
-
     @Override
     public Optional<Item> getItemById(Long userId, Long itemId) {
-        for(Long userIds : userItems.keySet()) {
-            if(userIds.equals(userId)) {
+        for (Long userIds : userItems.keySet()) {
+            if (userIds.equals(userId)) {
                 return userItems.get(userId).stream()
                         .filter(i -> i.getId().equals(itemId))
                         .findFirst();
@@ -75,8 +73,8 @@ public class ItemInMemoryDao implements ItemDaoStorage{
     @Override
     public List<Item> findAll(Long userId) {
         List<Item> responseItemList = new ArrayList<>();
-        for(Long userIds : userItems.keySet()) {
-            if(userIds.equals(userId)) {
+        for (Long userIds : userItems.keySet()) {
+            if (userIds.equals(userId)) {
                 responseItemList = userItems.get(userIds);
             }
         }
@@ -89,7 +87,7 @@ public class ItemInMemoryDao implements ItemDaoStorage{
     @Override
     public List<Item> findItemByText(String text) {
         return userItems.values().stream()
-                .flatMap(Collection :: stream)
+                .flatMap(Collection::stream)
                 .filter(i -> i.getName().trim().toLowerCase().contains(text.toLowerCase())
                  || i.getDescription().trim().toLowerCase().contains(text.toLowerCase()))
                 .filter(Item::getAvailable)
