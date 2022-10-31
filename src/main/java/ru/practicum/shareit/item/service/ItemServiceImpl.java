@@ -8,10 +8,7 @@ import ru.practicum.shareit.item.itemDto.ItemDto;
 import ru.practicum.shareit.item.itemDto.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepositoryImpl;
-import ru.practicum.shareit.user.UserMapper;
-import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.service.UserServiceImpl;
-import ru.practicum.shareit.user.userDTO.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +59,19 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public List<ItemDto> getAllItems() {
+    public List<ItemDto> getAllItems(Long userId) {
             List <ItemDto> items = new ArrayList<>();
-            for (Item item : itemRepository.getAll()) {
+            for (Item item : itemRepository.getAll(userId)) {
                 items.add(ItemMapper.toItemDto(item));
             }
             return items;
+    }
+    @Override
+    public List<ItemDto> searchItem(String request) {
+        List <ItemDto> items = new ArrayList<>();
+        for (Item item : itemRepository.searchItem(request)) {
+            items.add(ItemMapper.toItemDto(item));
+        }
+        return items;
     }
 }

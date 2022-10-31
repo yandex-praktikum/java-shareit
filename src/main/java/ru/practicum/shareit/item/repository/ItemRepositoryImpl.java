@@ -27,7 +27,28 @@ public class ItemRepositoryImpl implements ItemRepository{
         return itemMap.get(itemID);
     }
     @Override
-    public List<Item> getAll() {
-        return new ArrayList<>(itemMap.values());
+    public List<Item> getAll(Long userId) {
+        ArrayList<Item> userItems = new ArrayList<>();
+        for (Item item : itemMap.values()){
+            if (item.getOwner().equals(userId)){
+                userItems.add(item);
+            }
+        }
+        return userItems;
+    }
+
+    public List<Item> searchItem(String request) {
+        ArrayList<Item> items = new ArrayList<>();
+        if (!request.isBlank()){
+            for (Item item : itemMap.values()) {
+                if (item.getAvailable()&&
+                        item.getDescription().toLowerCase().contains(request.toLowerCase()) ||
+                        item.getName().toLowerCase().contains(request.toLowerCase())) {
+                    items.add(item);
+                }
+            }
+        }
+
+        return items;
     }
 }
