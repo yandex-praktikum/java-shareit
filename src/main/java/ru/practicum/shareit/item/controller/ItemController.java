@@ -6,6 +6,7 @@ import ru.practicum.shareit.item.itemDto.ItemDto;
 import ru.practicum.shareit.item.service.ItemServiceImpl;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * TODO Sprint add-controllers.
@@ -25,5 +26,13 @@ public class ItemController {
                           @PathVariable Long id,
                           @RequestHeader("X-Sharer-User-Id") Long userId) {
         return itemService.updateItem(itemDto, userId, id);
+    }
+    @GetMapping("/{id}")
+    public ItemDto getItem(@PathVariable Long id){
+        return itemService.getByID(id);
+    }
+    @GetMapping
+    private List<ItemDto> getAllItems(){
+        return itemService.getAllItems();
     }
 }

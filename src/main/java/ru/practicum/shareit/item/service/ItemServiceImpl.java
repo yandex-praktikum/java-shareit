@@ -2,14 +2,19 @@ package ru.practicum.shareit.item.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.practicum.shareit.exceptions.DuplicateEmailException;
 import ru.practicum.shareit.exceptions.NotFoundException;
 import ru.practicum.shareit.exceptions.WrongParameterException;
 import ru.practicum.shareit.item.itemDto.ItemDto;
 import ru.practicum.shareit.item.itemDto.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepositoryImpl;
+import ru.practicum.shareit.user.UserMapper;
+import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.service.UserServiceImpl;
+import ru.practicum.shareit.user.userDTO.UserDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +48,6 @@ public class ItemServiceImpl implements ItemService{
         else {
             throw  new WrongParameterException("Вещь не найдена");
         }
-
     }
 
     private void checkUser(Long userId){
@@ -51,5 +55,18 @@ public class ItemServiceImpl implements ItemService{
             userService.getById(userId);}
         catch (RuntimeException e){
             throw new NotFoundException("Юзер с ID " + userId + " не найден");}
+    }
+    @Override
+    public ItemDto getByID(Long id) {
+        return ItemMapper.toItemDto(itemRepository.getById(id));
+    }
+
+    @Override
+    public List<ItemDto> getAllItems() {
+            List <ItemDto> items = new ArrayList<>();
+            for (Item item : itemRepository.getAll()) {
+                items.add(ItemMapper.toItemDto(item));
+            }
+            return items;
     }
 }

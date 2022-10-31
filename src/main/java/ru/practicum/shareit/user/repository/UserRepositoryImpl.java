@@ -38,7 +38,6 @@ public class UserRepositoryImpl implements UserRepository {
     public User update(User user) {
         userMap.replace(user.getId(), user);
         return user;
-//        return userMap.get(user.getId());
     }
 
     @Override
