@@ -13,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @AllArgsConstructor
 public class UserDto {
+
+    private Long id;
     @NotBlank
     private String name;
     @NotBlank

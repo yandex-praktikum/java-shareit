@@ -10,6 +10,8 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @AllArgsConstructor
 public class ItemDto {
+
+    private Long id;
     @NotBlank
     private String name;
     @NotBlank

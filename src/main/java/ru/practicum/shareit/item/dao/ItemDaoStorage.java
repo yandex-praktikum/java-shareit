@@ -1,12 +1,13 @@
-package ru.practicum.shareit.item;
-import ru.practicum.shareit.item.dto.ItemDto;
+package ru.practicum.shareit.item.dao;
+
+import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ItemDaoStorage {
 
-    Item create(Long userId, ItemDto dto);
+    Item addToUserItemsList(Long userId, Item item);
 
     Optional<Item> update(Long userId, Long itemId, Item item);
 

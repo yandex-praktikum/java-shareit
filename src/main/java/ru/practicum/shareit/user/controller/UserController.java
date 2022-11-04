@@ -1,8 +1,9 @@
-package ru.practicum.shareit.user;
+package ru.practicum.shareit.user.controller;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.shareit.user.service.UserService;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import javax.validation.Valid;
@@ -17,24 +18,24 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public User create(@Valid @RequestBody UserDto userDto) {
+    public UserDto create(@Valid @RequestBody UserDto userDto) {
         return userService.create(userDto);
     }
 
     @PatchMapping("{userId}")
-    public Optional<User> update(@PathVariable @Positive (message = "id не может быть отрицательным числом")
+    public Optional<UserDto> update(@PathVariable @Positive (message = "id не может быть отрицательным числом")
                                  Long userId, @NonNull @RequestBody UserDto userDto) {
         return userService.update(userId, userDto);
     }
 
     @GetMapping("{userId}")
-    public Optional<User> getUserById(@PathVariable @Positive (message = "id не может быть отрицательным числом")
+    public Optional<UserDto> getUserById(@PathVariable @Positive (message = "id не может быть отрицательным числом")
                                       Long userId) {
         return userService.getUserById(userId);
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         return userService.getAll();
     }
 

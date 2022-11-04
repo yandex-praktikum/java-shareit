@@ -1,8 +1,8 @@
-package ru.practicum.shareit.item;
+package ru.practicum.shareit.item.dao;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.practicum.shareit.item.dto.ItemDto;
+import ru.practicum.shareit.item.model.Item;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,16 +11,15 @@ import java.util.stream.Collectors;
 @Component("itemInMemoryDao")
 public class ItemInMemoryDao implements ItemDaoStorage {
     private Map<Long, List<Item>> userItems;
-    private final ItemMapper mapper;
 
     @Override
-    public Item create(Long userId, ItemDto dto) {
-        Item item = mapper.fromItemDto(dto);
+    public Item addToUserItemsList(Long userId, Item item) {
         if (!userItems.containsKey(userId)) {
             userItems.put(userId, new ArrayList<>());
         }
         userItems.get(userId).add(item);
-        return item;
+        return getItemById(userId, item.getId()).orElseThrow(
+                () -> new RuntimeException("Ошибка при добавлении айтема"));
     }
 
     @Override
@@ -36,18 +35,6 @@ public class ItemInMemoryDao implements ItemDaoStorage {
             }
         }
         return Optional.empty();
-    }
-
-    private void itemBuild(Item itemForUpdate, Item itemFromRequest) {
-        if (itemFromRequest.getName() != null) {
-            itemForUpdate.setName(itemFromRequest.getName());
-        }
-        if (itemFromRequest.getDescription() != null) {
-            itemForUpdate.setDescription(itemFromRequest.getDescription());
-        }
-        if (itemFromRequest.getAvailable() != null) {
-            itemForUpdate.setAvailable(itemFromRequest.getAvailable());
-        }
     }
 
     @Override
@@ -72,16 +59,12 @@ public class ItemInMemoryDao implements ItemDaoStorage {
 
     @Override
     public List<Item> findAll(Long userId) {
-        List<Item> responseItemList = new ArrayList<>();
         for (Long userIds : userItems.keySet()) {
             if (userIds.equals(userId)) {
-                responseItemList = userItems.get(userIds);
+                return new ArrayList<>(userItems.get(userIds));
             }
         }
-        if (responseItemList.isEmpty()) {
-            throw new IllegalArgumentException("У юзера нет ни одного айтема");
-        }
-        return responseItemList;
+        throw new IllegalArgumentException("Юзера с id " + userId + " пока в каталоге нет");
     }
 
     @Override
@@ -92,5 +75,17 @@ public class ItemInMemoryDao implements ItemDaoStorage {
                  || i.getDescription().trim().toLowerCase().contains(text.toLowerCase()))
                 .filter(Item::getAvailable)
                 .collect(Collectors.toList());
+    }
+
+    private void itemBuild(Item itemForUpdate, Item itemFromRequest) {
+        if (itemFromRequest.getName() != null) {
+            itemForUpdate.setName(itemFromRequest.getName());
+        }
+        if (itemFromRequest.getDescription() != null) {
+            itemForUpdate.setDescription(itemFromRequest.getDescription());
+        }
+        if (itemFromRequest.getAvailable() != null) {
+            itemForUpdate.setAvailable(itemFromRequest.getAvailable());
+        }
     }
 }
