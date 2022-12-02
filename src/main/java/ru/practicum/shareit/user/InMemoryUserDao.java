@@ -37,9 +37,20 @@ public class InMemoryUserDao implements UserDao {
     }
 
     @Override
-    public User updateUser(User user) {
-        usersDao.put(user.getId(), user);
-        return user;
+    public User updateUser(Long userId, User user) {
+        User userForupdate = usersDao.get(userId);
+        if (user.getName() != null) {
+            userForupdate.setName(user.getName());
+        }
+        if (user.getEmail() != null) {
+            if (checkUserData(user)) {
+                userForupdate.setEmail(user.getEmail());
+            } else {
+                throw new DuplicateDataException("Не удалось обновить данные пользователя. "
+                        + "Пользователь с таким email уже существует");
+            }
+        }
+        return userForupdate;
     }
 
     @Override

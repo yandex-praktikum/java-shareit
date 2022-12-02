@@ -33,9 +33,10 @@ public class UserService {
         return UserMapper.toUserDto(user);
     }
 
-    public User updateUser(UserDto userDto) {
-        log.info("Обновление пользователя {}", userDto);
-        return userDao.updateUser(UserMapper.toUser(userDto));
+    public UserDto updateUser(Long userId, UserDto userDto) {
+        log.info("Обновление пользователя с ID = {}", userId);
+        User userForUpdate = userDao.updateUser(userId, UserMapper.toUser(userDto));
+        return UserMapper.toUserDto(userForUpdate);
     }
 
     public boolean deleteUser(Long userId) {

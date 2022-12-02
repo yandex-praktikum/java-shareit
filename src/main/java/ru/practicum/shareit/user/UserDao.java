@@ -6,6 +6,6 @@ public interface UserDao {
     User getUserById(Long usedId);
     List<User> getAllUsers();
     User createUser(User user);
-    User updateUser(User user);
+    User updateUser(Long userId, User user);
     boolean deleteUser(Long userId);
 }

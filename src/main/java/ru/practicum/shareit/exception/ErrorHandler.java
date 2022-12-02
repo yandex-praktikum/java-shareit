@@ -28,10 +28,10 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handleDuplicateDataException(DuplicateDataException e, HttpServletRequest request) {
         log.warn("Дублирующиеся данные {} по пути запроса {}", e.getMessage(), request.getServletPath());
         return new ResponseEntity<>(e.getMessage() + " Путь запроса: "
-                + request.getServletPath(), HttpStatus.BAD_REQUEST);
+                + request.getServletPath(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -33,4 +33,16 @@ public class UserController {
         log.info("Поступил запрос на создание пользователя {}", userDto);
         return userService.createUser(userDto);
     }
+
+    @PatchMapping("/{userId}")
+    public UserDto updateUser(@RequestBody UserDto userDto, @PathVariable Long userId) {
+        log.info("Поступил запрос на обновление пользователя с ID = {}", userId);
+        return userService.updateUser(userId, userDto);
+    }
+
+    @DeleteMapping("/{userId}")
+    public boolean deleteUser(@PathVariable Long userId) {
+        log.info("Поступил запрос на обновление пользователя с ID = {}", userId);
+        return userService.deleteUser(userId);
+    }
 }
