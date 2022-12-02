@@ -17,7 +17,7 @@ public class InMemoryItemStorage implements ItemStorage {
 
     private final HashMap<Integer, Item> items = new HashMap<>();
 
-    private static Integer getNextId(){
+    private static Integer getNextId() {
         return generateId++;
     }
 
