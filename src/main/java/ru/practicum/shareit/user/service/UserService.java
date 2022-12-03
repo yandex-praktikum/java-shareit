@@ -1,8 +1,12 @@
-package ru.practicum.shareit.user;
+package ru.practicum.shareit.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.practicum.shareit.exception.EntityNotFoundException;
+import ru.practicum.shareit.user.dao.UserDao;
+import ru.practicum.shareit.user.dto.UserDto;
+import ru.practicum.shareit.user.model.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +20,11 @@ public class UserService {
     public UserDto getUserById(Long userId) {
         log.info("Получение пользователя по ID = {}", userId);
         User user = userDao.getUserById(userId);
-        return UserMapper.toUserDto(user);
+        if (user != null) {
+            return UserMapper.toUserDto(user);
+        } else {
+            throw new EntityNotFoundException("Пользователь с ID " + userId + " не найден");
+        }
     }
 
     public List<UserDto> getAllUsers() {
