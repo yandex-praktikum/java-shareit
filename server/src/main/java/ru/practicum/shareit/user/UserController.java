@@ -1,11 +1,7 @@
 package ru.practicum.shareit.user;
-import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.user.dto.UserDto;
-import ru.practicum.shareit.user.dto.UserMapper;
-import ru.practicum.shareit.user.model.User;
-import ru.practicum.shareit.user.service.UserService;
 
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -36,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDto add(@Valid @RequestBody UserDto userDto) {
+    public UserDto add(@RequestBody UserDto userDto) {
         User user = userMapper.toUser(userDto);
         return userMapper.toDto(userServiceImpl.add(user));
     }

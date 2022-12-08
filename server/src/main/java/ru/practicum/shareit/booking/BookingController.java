@@ -1,13 +1,10 @@
 package ru.practicum.shareit.booking;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.StatusDto;
-import ru.practicum.shareit.booking.service.BookingService;
 
-import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
@@ -17,12 +14,13 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping
-    public BookingDto add(@Valid @RequestBody BookingDto bookingDto, @RequestHeader("X-Sharer-User-Id") Integer userId) {
+    public BookingDto add(@RequestBody BookingDto bookingDto,
+                          @RequestHeader("X-Sharer-User-Id") Integer userId) {
         return bookingService.add(bookingDto, userId);
     }
 
     @PatchMapping("/{bookingId}")
-    public BookingDto updApprove(@PathVariable Integer bookingId, @RequestParam @NonNull Boolean approved,
+    public BookingDto updApprove(@PathVariable Integer bookingId, @RequestParam Boolean approved,
                                  @RequestHeader("X-Sharer-User-Id") Integer userId) {
         return bookingService.updApprove(bookingId, approved, userId);
     }
