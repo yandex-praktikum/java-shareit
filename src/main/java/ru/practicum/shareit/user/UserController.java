@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserController {
-    UserServiceImpl userServiceImpl;
+    UserService userServiceImpl;
 
     @GetMapping
     public List<UserDto> getAll() {
