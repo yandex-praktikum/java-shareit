@@ -15,30 +15,30 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserController {
-    UserServiceImpl userService;
+    UserServiceImpl userServiceImpl;
 
     @GetMapping
     public List<UserDto> getAll() {
-        return userService.getAll().stream().map(UserMapper::toUserDto).collect(Collectors.toList());
+        return userServiceImpl.getAll().stream().map(UserMapper::toUserDto).collect(Collectors.toList());
     }
 
     @PostMapping
     public UserDto create(@Valid @RequestBody UserDto userDto) {
-        return UserMapper.toUserDto(userService.create(UserMapper.toUser(userDto)));
+        return UserMapper.toUserDto(userServiceImpl.create(UserMapper.toUser(userDto)));
     }
 
     @PatchMapping("/{userId}")
     public UserDto update(@RequestBody UserDto userDto, @PathVariable("userId") Long id) {
-        return UserMapper.toUserDto(userService.update(UserMapper.toUser(userDto), id));
+        return UserMapper.toUserDto(userServiceImpl.update(UserMapper.toUser(userDto), id));
     }
 
     @GetMapping("/{userId}")
     public UserDto getById(@PathVariable("userId") Long id) {
-        return UserMapper.toUserDto(userService.getById(id));
+        return UserMapper.toUserDto(userServiceImpl.getById(id));
     }
 
     @DeleteMapping("{userId}")
     public void delete(@PathVariable("userId") Long id) {
-        userService.delete(id);
+        userServiceImpl.delete(id);
     }
 }

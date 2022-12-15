@@ -16,33 +16,33 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ItemController {
-    ItemServiceImpl itemService;
+    ItemServiceImpl itemServiceImpl;
 
     @PostMapping
     public ItemDto create(@RequestHeader("X-Sharer-User-Id") Long userId, @RequestBody @Valid ItemDto itemDto) {
         itemDto.setOwner(userId);
-        return ItemMapper.toItemDto(itemService.create(ItemMapper.toItem(itemDto)));
+        return ItemMapper.toItemDto(itemServiceImpl.create(ItemMapper.toItem(itemDto)));
     }
 
     @PatchMapping("/{itemId}")
     public ItemDto update(@RequestHeader("X-Sharer-User-Id") Long userId, @RequestBody ItemDto itemDto,
                           @PathVariable("itemId") Long id) {
         itemDto.setOwner(userId);
-        return ItemMapper.toItemDto(itemService.update(ItemMapper.toItem(itemDto), id));
+        return ItemMapper.toItemDto(itemServiceImpl.update(ItemMapper.toItem(itemDto), id));
     }
 
     @GetMapping("/{itemId}")
     public ItemDto getById(@PathVariable("itemId") Long id) {
-        return ItemMapper.toItemDto(itemService.getById(id));
+        return ItemMapper.toItemDto(itemServiceImpl.getById(id));
     }
 
     @GetMapping
     public List<ItemDto> getAll(@RequestHeader("X-Sharer-User-Id") Long userId) {
-        return itemService.getAll(userId).stream().map(ItemMapper::toItemDto).collect(Collectors.toList());
+        return itemServiceImpl.getAll(userId).stream().map(ItemMapper::toItemDto).collect(Collectors.toList());
     }
 
     @GetMapping("/search")
     public List<ItemDto> search(@RequestParam String text) {
-        return itemService.search(text).stream().map(ItemMapper::toItemDto).collect(Collectors.toList());
+        return itemServiceImpl.search(text).stream().map(ItemMapper::toItemDto).collect(Collectors.toList());
     }
 }
