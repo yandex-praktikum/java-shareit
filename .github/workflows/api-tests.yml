@@ -13,7 +13,8 @@ jobs:
         run: |
           REPO=$(curl -H "Accept: application/vnd.github+json" "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}")
           FORK=$(jq '.fork' <<< "$REPO")
-          echo "FORK='$FORK', GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER} "
+          PRIVATE=$(jq '.private' <<< "$REPO")
+          echo "FORK='$FORK', PRIVATE='$PRIVATE', GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER} "
           if [[ "$FORK" == "true" ]]
           then
             echo "Use the repository automatically created by Yandex Practicum (works in fork repositories are not accepted)"
@@ -28,6 +29,7 @@ jobs:
           fi
           if [[ "$FORK" != "false" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
           then
+            echo "$REPO"
             echo "Share your repository, make it public"
             echo "Откройте доступ к вашему репозиторию, сделайте его публичным"
             exit -3
