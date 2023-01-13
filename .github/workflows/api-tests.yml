@@ -5,8 +5,37 @@ on:
   workflow_call:
 
 jobs:
+  check-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check repo not fork and public
+        run: |
+          REPO=$(curl -H "Accept: application/vnd.github+json" "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}")
+          FORK=$(jq '.fork' <<< "$REPO")
+          echo "FORK='$FORK', GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER} "
+          if [[ "$FORK" == "true" ]]
+          then
+            echo "Use the repository automatically created by Yandex Practicum (works in fork repositories are not accepted)"
+            echo "Используйте только репозиторий созданный Yandex Practicum, работы в форк репозитории не принимаются"
+            exit -1
+          fi
+          if [[ "$GITHUB_REPOSITORY_OWNER" == "yandex-praktikum" ]]
+          then
+            echo "Use the repository automatically created by Yandex Practicum (works in fork repositories are not accepted)"
+            echo "Используйте только репозиторий созданный Yandex Practicum, работы в форк репозитории не принимаются"
+            exit -2
+          fi
+          if [[ "$FORK" != "false" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+          then
+            echo "Share your repository, make it public"
+            echo "Откройте доступ к вашему репозиторию, сделайте его публичным"
+            exit -3
+          fi
+
   build-shareit:
 
+    needs: check-repo
     runs-on: ubuntu-latest
 
     steps:
