@@ -33,7 +33,7 @@ public class UserStorageImpl implements UserStorage {
     }
 
     @Override
-    public User patch(User user) {
+    public User update(User user) {
         checkId(user.getId());
         validateEmail(user);
         User updatedUser = users.get(user.getId());
@@ -43,7 +43,7 @@ public class UserStorageImpl implements UserStorage {
         if (user.getEmail() != null && !user.getEmail().isEmpty()) {
             updatedUser.setEmail(user.getEmail());
         }
-        users.put(updatedUser.getId(), updatedUser)
+        users.put(updatedUser.getId(), updatedUser);
         return users.get(updatedUser.getId());
     }
 
