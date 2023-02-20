@@ -250,8 +250,4 @@
 	</module>
 	<!--	<module name="NewlineAtEndOfFile"/>-->
 	<module name="SuppressWarningsFilter"/>
-	<module name="SuppressionFilter">
-		<property name="file" value="suppressions.xml"/>
-		<property name="optional" value="false"/>
-	</module>
 </module>

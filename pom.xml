@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.2</version>
+		<version>2.7.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -43,6 +43,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -54,6 +55,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -167,17 +173,17 @@
 											<limit>
 												<counter>BRANCH</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.6</minimum>
+												<minimum>0.9</minimum>
 											</limit>
 											<limit>
 												<counter>COMPLEXITY</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.6</minimum>
+												<minimum>0.9</minimum>
 											</limit>
 											<limit>
 												<counter>METHOD</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.7</minimum>
+												<minimum>0.9</minimum>
 											</limit>
 											<limit>
 												<counter>CLASS</counter>
@@ -190,8 +196,8 @@
 							</configuration>
 						</execution>
 						<execution>
-							<id>jacoco-report</id>
-							<phase>test</phase>
+							<id>jacoco-site</id>
+							<phase>install</phase>
 							<goals>
 								<goal>report</goal>
 							</goals>
