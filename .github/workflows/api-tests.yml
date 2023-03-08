@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Check repo not fork and public
         run: |
-          REPO=$(curl -H "Accept: application/vnd.github+json" "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}")
+          REPO=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "/repos/${GITHUB_REPOSITORY}")
           FORK=$(jq '.fork' <<< "$REPO")
           PRIVATE=$(jq '.private' <<< "$REPO")
           echo "FORK='$FORK', PRIVATE='$PRIVATE', GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER} "
@@ -27,13 +27,80 @@ jobs:
             echo "Используйте только репозиторий созданный Yandex Practicum, работы в форк репозитории не принимаются"
             exit -2
           fi
-          if [[ "$FORK" != "false" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+          if [[ "$PRIVATE" == "true" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
           then
-            echo "$REPO"
             echo "Share your repository, make it public"
             echo "Откройте доступ к вашему репозиторию, сделайте его публичным"
             exit -3
           fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Check branch name
+        run: |
+          if [[ "$GITHUB_BASE_REF" != "main" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+          then
+            echo "Set the pull request to merge branch 'main' (instead of '$GITHUB_BASE_REF')"
+            echo "Задайте в Pull request ветку слияния 'main'  (вместо '$GITHUB_BASE_REF')"
+            exit -2
+          fi
+          echo "Github target '$GITHUB_BASE_REF' - OK"
+
+          if [[ "$GITHUB_HEAD_REF" == "add-controllers" ]]
+          then
+            echo "Sprint 14: add-controllers - OK"
+            exit
+          fi
+          if [[ "$GITHUB_HEAD_REF" == "add-bookings" ]]
+          then
+            echo "Sprint 15: add-bookings - OK"
+            PULL=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  /repos/${GITHUB_REPOSITORY}/pulls?head=${GITHUB_REPOSITORY_OWNER}:add-controllers || true)
+            OPEN=$(jq '. | length' <<< "$PULL")
+            if [[ "$OPEN" != "0" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+            then
+              PULL_URL=$(jq '.[0].html_url' <<< "$PULL")
+              echo "Merge the add-controllers branch pull request: ${PULL_URL}"
+              echo "Объедините pull request ветки add-controllers: ${PULL_URL}"
+              exit -3
+            fi
+            echo "Sprint 14: add-controllers - Merged"
+            exit
+          fi
+          if [[ "$GITHUB_HEAD_REF" == "add-item-requests" ]]
+          then
+            echo "Sprint 16: add-item-requests - OK"
+            PULL=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  /repos/${GITHUB_REPOSITORY}/pulls?head=${GITHUB_REPOSITORY_OWNER}:add-bookings || true)
+            OPEN=$(jq '. | length' <<< "$PULL")
+            if [[ "$OPEN" != "0" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+            then
+              PULL_URL=$(jq '.[0].html_url' <<< "$PULL")
+              echo "Merge the add-bookings branch pull request: ${PULL_URL}"
+              echo "Объедините pull request ветки add-bookings: ${PULL_URL}"
+              exit -4
+            fi
+            echo "Sprint 15: add-bookings - Merged"
+            exit
+          fi
+          if [[ "$GITHUB_HEAD_REF" == "add-docker" ]]
+          then
+            echo "Sprint 17: add-docker - OK"
+            PULL=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  /repos/${GITHUB_REPOSITORY}/pulls?head=${GITHUB_REPOSITORY_OWNER}:add-item-requests || true)
+            OPEN=$(jq '. | length' <<< "$PULL")
+            if [[ "$OPEN" != "0" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+            then
+              PULL_URL=$(jq '.[0].html_url' <<< "$PULL")
+              echo "Merge the add-item-requests branch pull request: ${PULL_URL}"
+              echo "Объедините pull request ветки add-item-requests: ${PULL_URL}"
+              exit -4
+            fi
+            echo "Sprint 16: add-item-requests - Merged"
+            exit
+          fi
+          echo "Correct branch name '$GITHUB_HEAD_REF' according to the spec, allowed: add-controllers, add-bookings, add-item-requests, add-docker"
+          echo "Исправьте пожалуйста имя ветки '$GITHUB_HEAD_REF' согласно заданию, разрешены: add-controllers, add-bookings, add-item-requests, add-docker"
+          exit -1
+        env:
+          GH_TOKEN: ${{ github.token }}
 
   build-shareit:
 
