@@ -102,6 +102,36 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
+      - name: Check files
+        run: |
+          PULL=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  /repos/${GITHUB_REPOSITORY}/pulls/${PULL_NUMBER}/files?per_page=100 || true)
+          FILENAMES=$(jq '.[] | .filename' <<< "$PULL")
+          if [[ "$FILENAMES"  =~ "api-tests.yml" ]]
+          then
+            echo "The pull request contains the api-tests.yml file and cannot be modified. Remove it from PR"
+            echo "Pull request содержит файл api-tests.yml, его изменять нельзя. Удалите его из PR"
+            exit -1
+          fi
+          if [[ "$FILENAMES"  =~ "checkstyle.xml" ]]
+          then
+            echo "The pull request contains the checkstyle.xml file and cannot be modified. Remove it from PR"
+            echo "Pull request содержит файл checkstyle.xml, его изменять нельзя. Удалите его из PR"
+            exit -2
+          fi
+          if [[ "$FILENAMES"  =~ ".class" ]] || [[ "$FILENAMES"  =~ ".jar" ]] || [[ "$FILENAMES"  =~ "mvn" ]] || [[ "$FILENAMES"  =~ ".DS_Store" ]] \
+          || [[ "$FILENAMES"  =~ ".idea" ]] || [[ "$FILENAMES"  =~ ".iws" ]] || [[ "$FILENAMES"  =~ ".iml" ]] || [[ "$FILENAMES"  =~ ".ipr" ]] \
+          || [[ "$FILENAMES"  =~ ".db" ]] || [[ "$FILENAMES"  =~ ".log" ]] || [[ "$FILENAMES"  =~ "out/" ]] || [[ "$FILENAMES"  =~ "target/" ]]
+          then
+            echo "The pull request contains the binary files. Remove them (*.class, *.jar, *.DS_Store ...) from PR"
+            echo "Pull request содержит двоичные файлы. Удалите их (*.class, *.jar, *.DS_Store ...) из PR"
+            exit -3
+          fi
+          echo "PR files - OK"
+          exit
+        env:
+          PULL_NUMBER: ${{ github.event.number }}
+          GH_TOKEN: ${{ github.token }}
+
   build-shareit:
 
     needs: check-repo
