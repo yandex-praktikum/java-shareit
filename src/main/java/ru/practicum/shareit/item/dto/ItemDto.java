@@ -2,8 +2,6 @@ package ru.practicum.shareit.item.dto;
 
 import lombok.Builder;
 import lombok.Value;
-import ru.practicum.shareit.request.ItemRequest;
-import ru.practicum.shareit.user.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -12,6 +10,7 @@ import javax.validation.constraints.Size;
 @Value
 @Builder
 public class ItemDto {
+
     @NotBlank(message = "Name cannot be empty")
     @Size(max = 100, message = "Name must be shorter than 100 characters")
     String name;
@@ -21,10 +20,5 @@ public class ItemDto {
     String description;
 
     @NotNull(message = "Description cannot be null")
-    boolean available;
-
-    @NotNull(message = "Owner cannot be null")
-    User owner;
-
-    Long requestId;
+    Boolean available;
 }

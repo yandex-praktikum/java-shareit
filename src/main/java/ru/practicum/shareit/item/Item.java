@@ -2,6 +2,7 @@ package ru.practicum.shareit.item;
 
 import lombok.Builder;
 import lombok.Value;
+import lombok.With;
 import ru.practicum.shareit.request.ItemRequest;
 import ru.practicum.shareit.user.User;
 
@@ -10,8 +11,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Value
+@With
 @Builder
 public class Item {
+
     long id;
 
     @NotBlank(message = "Name cannot be empty")
@@ -23,9 +26,8 @@ public class Item {
     String description;
 
     @NotNull(message = "Description cannot be null")
-    boolean available;
+    Boolean available;
 
-    @NotNull(message = "Owner cannot be null")
     User owner;
 
     ItemRequest request;
