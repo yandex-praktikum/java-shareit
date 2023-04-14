@@ -4,7 +4,7 @@ import lombok.*;
 import ru.practicum.shareit.user.model.User;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -13,9 +13,7 @@ import javax.validation.constraints.NotBlank;
 @ToString
 public class UserDto extends User {
     private Long id;
-    @NonNull
     private String name;
     @Email
-    @NotBlank
     private String email;
 }
