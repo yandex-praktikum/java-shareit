@@ -1,11 +1,7 @@
 package ru.practicum.shareit.item.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import lombok.*;
+import ru.practicum.shareit.request.model.ItemRequest;
 
 /**
  * TODO Sprint add-controllers.
@@ -13,14 +9,14 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Item {
     private Long id;
-    @NotBlank
     private String name;
-    @NotBlank
     private String description;
-    private Boolean availabilityStatus;
-    private Long ownerId;
-    @NotNull
-    private Long requestId;
+    private Boolean isAvailable;
+    private Long owner;
+    private ItemRequest request;
 }

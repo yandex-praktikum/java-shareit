@@ -2,9 +2,9 @@ package ru.practicum.shareit.user;
 
 import lombok.*;
 import org.springframework.stereotype.Service;
-import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.model.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,13 +14,13 @@ import java.util.Map;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
     Map<Long, User> usersMap = new HashMap<>();
     private Long currentId = 0L;
 
     @Override
-    public List<UserDto> findAllUsers() {
-        return null;
+    public List<User> findAllUsers() {
+        return new ArrayList<>(usersMap.values());
     }
 
     @Override
@@ -31,11 +31,18 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(Long userId) {
+        usersMap.remove(userId);
     }
 
     @Override
     public User findUserById(Long userId) {
         return usersMap.get(userId);
+    }
+
+    @Override
+    public User updateUser(User userDtoInUser) {
+        usersMap.put(userDtoInUser.getId(), userDtoInUser);
+        return usersMap.get(userDtoInUser.getId());
     }
 }

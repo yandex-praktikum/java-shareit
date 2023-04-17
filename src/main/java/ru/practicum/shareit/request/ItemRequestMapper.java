@@ -6,9 +6,9 @@ import ru.practicum.shareit.request.model.ItemRequest;
 public class ItemRequestMapper {
     public static ItemRequestDto inItemReqestDto(ItemRequest itemRequest){
         return new ItemRequestDto(
-                itemRequest.getNameUserRequest(),
+                itemRequest.getRequestor(),
                 itemRequest.getDescription(),
-                itemRequest.getTimeCreation()
+                itemRequest.getCreated()
         );
     }
 }
