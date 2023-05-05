@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking.dto;
+package ru.practicum.shareit.item.comment.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -6,31 +6,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.practicum.shareit.booking.model.Status;
 
 import java.time.LocalDateTime;
 
-/**
- * TODO Sprint add-bookings.
- */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingDto {
+public class CommentDto {
 
     private Integer id;
 
-    private LocalDateTime start;
+    private String text;
 
-    private LocalDateTime end;
+    private String authorName;
 
-    private Integer itemId;
-
-    private String itemName;
-
-    private Integer bookerId;
-
-    private Status status;
+    private LocalDateTime created;
 
 }
