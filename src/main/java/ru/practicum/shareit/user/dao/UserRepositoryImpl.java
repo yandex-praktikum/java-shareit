@@ -19,8 +19,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> getUserById(long id) {
-        return users.stream().filter(user -> user.getId() == id).findFirst();
+    public Optional<User> getUserById(long userId) {
+        return users.stream().filter(user -> user.getId() == userId).findFirst();
     }
 
     @Override
@@ -31,10 +31,10 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void deleteUser(long id) {
-        if (!getUserById(id).isPresent()) {
+    public void deleteUser(long userId) {
+        if (!getUserById(userId).isPresent()) {
             throw new UserNotFoundException("Пользователь не найден.");
         }
-        users.remove(getUserById(id).get());
+        users.remove(getUserById(userId).get());
     }
 }

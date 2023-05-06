@@ -22,27 +22,27 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable long id) {
-        log.info("GET / users / {}", id);
-        return userService.getUserById(id);
+    @GetMapping("/{userId}")
+    public UserDto getUserById(@PathVariable long userId) {
+        log.info("GET / users / {}", userId);
+        return userService.getUserById(userId);
     }
 
     @PostMapping
     public UserDto saveNewUser(@Valid @RequestBody UserDto userDto) {
-        log.info("POST / user / {}", userDto.getName());
+        log.info("POST / users / {}", userDto.getName());
         return userService.saveNewUser(userDto);
     }
 
-    @PatchMapping("/{id}")
-    public UserDto updateUser(@PathVariable long id, @RequestBody UserDto userDto) {
-        log.info("PATCH / user / {}", id);
-        return userService.updateUser(id, userDto);
+    @PatchMapping("/{userId}")
+    public UserDto updateUser(@PathVariable long userId, @RequestBody UserDto userDto) {
+        log.info("PATCH / users / {}", userId);
+        return userService.updateUser(userId, userDto);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable long id) {
-        log.info("DELETE / user / {}", id);
-        userService.deleteUser(id);
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable long userId) {
+        log.info("DELETE / users / {}", userId);
+        userService.deleteUser(userId);
     }
 }

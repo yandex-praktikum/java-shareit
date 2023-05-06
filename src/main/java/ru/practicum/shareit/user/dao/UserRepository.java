@@ -10,7 +10,7 @@ public interface UserRepository {
 
     User saveNewUser(User user);
 
-    Optional<User> getUserById(long id);
+    Optional<User> getUserById(long userId);
 
-    void deleteUser(long id);
+    void deleteUser(long userId);
 }
