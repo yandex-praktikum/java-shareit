@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@ValidateDateStartAndEnd
 public class BookingShortDto {
     long id;
     @ReadOnlyProperty

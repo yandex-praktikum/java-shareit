@@ -23,7 +23,6 @@ public class RequestDto {
     @ReadOnlyProperty
     long id;
 
-    @NotBlank
     String description;//— развёрнутое описание;
 
     @ReadOnlyProperty

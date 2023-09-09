@@ -21,19 +21,22 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@ValidateDateStartAndEnd
 public class BookingDto {
     @ReadOnlyProperty
     long id;
 
-
+    @NotNull
     long itemId;
 
-
+    @NotNull
+    @Future
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     LocalDateTime start;
 
-
+    @NotNull
+    @Future
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     LocalDateTime end;
