@@ -56,10 +56,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     private void checkEmail(String email, Long userId) { // Второй параметр может быть null в случае создания пользователя
-         /*
-        Во-первых, мне не нравится этот "брудфорс" по пользователям (алгоритмическая сложность o(n))
-        Во-вторых, стоит ли в репозитории проверять существование почты или перенести проверку в сервис?
-         */
+
         if (userId == null) { // В случае создания пользователя
             for (User createdUser : users.values()) {
                 if (createdUser.getEmail().equals(email))
