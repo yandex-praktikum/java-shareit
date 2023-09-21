@@ -85,6 +85,7 @@ public class BookingRepositoryImp implements BookingRepository {
     @Override
     public Review addReview(Long requesterId, Long bookingId, Review review) {
         var booking = getBooking(bookingId);
+
         checkBooking(booking, requesterId);
         review.setId(reviewGlobalId);
         reviewGlobalId++;
