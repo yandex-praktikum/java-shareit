@@ -9042,7 +9042,7 @@
 					"response": []
 				},
 				{
-					"name": "Item 6 get  by user 4 (owner) without comments",
+					"name": "Item 4 get  by user 6 (owner) without comments",
 					"event": [
 						{
 							"listen": "test",
