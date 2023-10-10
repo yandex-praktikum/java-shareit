@@ -1,7 +1,7 @@
-package ru.practicum.shareit.request.dto;
+package ru.practicum.shareit.request.model;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import ru.practicum.shareit.user.model.User;
 
 import java.time.LocalDateTime;
@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 /**
  * TODO Sprint add-item-requests.
  */
+@Slf4j
 @Data
-@Builder(toBuilder = true)
-public class ItemRequestDto {
+public class ItemRequest {
     private Long id;
     private String description;
     private User requestor;
