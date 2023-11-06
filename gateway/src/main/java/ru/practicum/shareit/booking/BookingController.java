@@ -11,6 +11,7 @@ import ru.practicum.shareit.booking.dto.BookItemRequestDto;
 import ru.practicum.shareit.booking.dto.BookingState;
 
 import javax.validation.Valid;
+import javax.validation.ValidationException;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -21,6 +22,27 @@ import javax.validation.constraints.PositiveOrZero;
 @Validated
 public class BookingController {
 	private final BookingClient bookingClient;
+
+	@PostMapping
+	public ResponseEntity<Object> bookItem(@RequestHeader("X-Sharer-User-Id") long userId,
+										   @RequestBody @Valid BookItemRequestDto requestDto) {
+		log.info("Creating booking {}, userId={}", requestDto, userId);
+		return bookingClient.bookItem(userId, requestDto);
+	}
+
+	@PatchMapping("/{bookingId}")
+	public ResponseEntity<Object> updateBooking(@RequestHeader("X-Sharer-User-Id") Long userId,
+												@PathVariable Long bookingId,
+												@RequestParam String approved) {
+		return bookingClient.updateBooking(userId, bookingId, approved);
+	}
+
+	@GetMapping("/{bookingId}")
+	public ResponseEntity<Object> getBooking(@RequestHeader("X-Sharer-User-Id") long userId,
+											 @PathVariable Long bookingId) {
+		log.info("Get booking {}, userId={}", bookingId, userId);
+		return bookingClient.getBooking(userId, bookingId);
+	}
 
 	@GetMapping
 	public ResponseEntity<Object> getBookings(@RequestHeader("X-Sharer-User-Id") long userId,
@@ -33,16 +55,22 @@ public class BookingController {
 		return bookingClient.getBookings(userId, state, from, size);
 	}
 
-	@PostMapping
-	public ResponseEntity<Object> bookItem(@RequestHeader("X-Sharer-User-Id") long userId,
-			@RequestBody @Valid BookItemRequestDto requestDto) {
-		log.info("Creating booking {}, userId={}", requestDto, userId);
-		return bookingClient.bookItem(userId, requestDto);
+	@GetMapping("/owner")
+	public ResponseEntity<Object> getBookingsByItem(@RequestHeader("X-Sharer-User-Id") Long userId,
+												   @RequestParam(name = "state", defaultValue = "all") String stateParam,
+												   @RequestParam(required = false) Long from,
+												   @RequestParam(required = false) Long size) {
+		BookingState state = BookingState.from(stateParam)
+				.orElseThrow(() -> new ValidationException("Unknown state: " + stateParam));
+		log.info("Get booking with state {}, userId={}, from={}, size={}", stateParam, userId, from, size);
+		return bookingClient.getBookingsByItem(userId, state, from, size);
 	}
 
-	@GetMapping("/{bookingId}")
-	public ResponseEntity<Object> getBooking(@RequestHeader("X-Sharer-User-Id") long userId,
-			@PathVariable Long bookingId) {
-		log.info("Get booking {}, userId={}", bookingId, userId);
-		return bookingClient.getBooking(userId, bookingId);
-	}}
+	/*@GetMapping
+	public ResponseEntity<Object> getAllBookings(@RequestHeader("X-Sharer-User-Id") Long userId,
+												 @RequestParam(required = false) Long from,
+												 @RequestParam(required = false) Long size) {
+		log.info("Get booking userId={}, from={}, size={}", userId, from, size);
+		return bookingClient.getAllBookings(userId, from, size);
+	}*/
+}
