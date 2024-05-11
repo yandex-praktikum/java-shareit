@@ -13,6 +13,10 @@
 
     <name>ShareIt Gateway</name>
 
+    <properties>
+        <java.version>11</java.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,6 +54,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.25</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
