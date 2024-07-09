@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImp {
-    private final MemoryItemRepository repository;
+    private final ItemRepository repository;
     private final UserService userService;
 
     public ItemDto create(ItemDto itemDto, Long userId) {
@@ -26,7 +26,7 @@ public class ItemServiceImp {
 
         Item item = ItemMapper.mapToItem(itemDto);
         item.setOwnerId(userId);
-        item.setId(Utils.getNextId(repository.getItems().values()));
+        item.setId(Utils.getNextId(repository.findAll()));
 
         repository.create(item);
         return ItemMapper.mapToItemDto(item);

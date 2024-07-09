@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Component
 @Data
-public class MemoryItemRepository {
+public class MemoryItemRepository implements ItemRepository {
     private final Map<Long, Item> items = new HashMap<>();
 
     public void create(Item item) {
@@ -40,9 +40,4 @@ public class MemoryItemRepository {
                 .filter(item -> item.getDescription().toLowerCase().contains(text.toLowerCase()))
                 .toList();
     }
-
-    public Collection<Item> find() {
-        return items.values();
-    }
-
  }
