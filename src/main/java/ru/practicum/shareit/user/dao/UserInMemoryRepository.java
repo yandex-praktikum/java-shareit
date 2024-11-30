@@ -70,4 +70,5 @@ public class UserInMemoryRepository {
     private long getNextId() {
         return listOfAllUsers.size() + 1;
     }
+
 }
