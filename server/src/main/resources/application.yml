@@ -1,0 +1,33 @@
+server:
+  port: 9090
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+  sql.init:
+    schema-locations: classpath:schema.sql
+    mode: always
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shareit
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+
+logging.level:
+  ru.practicum.shareit: DEBUG
+  org:
+    springframework:
+      data: DEBUG
+      orm.jpa: INFO
+      transaction: INFO
+    hibernate:
+      SQL: DEBUG
+      type:
+        descriptor:
+          sql: TRACE
+    zalando.logbook: DEBUG
