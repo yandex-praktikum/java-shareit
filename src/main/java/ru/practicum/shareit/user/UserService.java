@@ -16,14 +16,25 @@ public class UserService {
     }
 
     public User updateUser(long id, User user) {
+
         return userRepository.findById(id).map(existingUser -> {
-            if (user.getName() != null && !user.getName().isBlank()) {
+            boolean updated = false;
+
+            if (user.getName() != null && !user.getName().isEmpty()) {
                 existingUser.setName(user.getName());
+                updated = true;
             }
-            if (user.getEmail() != null && !user.getEmail().isBlank()) {
+
+            if (user.getEmail() != null && !user.getEmail().isEmpty()) {
                 existingUser.setEmail(user.getEmail());
+                updated = true;
             }
-            return userRepository.save(existingUser);
+
+            if (updated) {
+                return userRepository.save(existingUser);
+            } else {
+                return existingUser;
+            }
         }).orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
     }
 
