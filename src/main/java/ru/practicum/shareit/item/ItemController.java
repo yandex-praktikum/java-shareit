@@ -14,4 +14,6 @@ private final ItemService itemService;
     public ItemDto createItem(@RequestHeader ("X-Sharer-User-Id") long userId, @RequestBody ItemDto itemDto) {
     return itemService.createItem(itemDto, userId);
 }
+@GetMapping("/{id}")
+    public ItemDto getItem(@RequestHeader("X-Sharer-User-Id") long userId,@PathVariable long id) { return itemService.getItem(id); }
 }

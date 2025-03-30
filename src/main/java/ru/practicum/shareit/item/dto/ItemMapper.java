@@ -1,7 +1,6 @@
 package ru.practicum.shareit.item.dto;
 
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import ru.practicum.shareit.item.model.Item;
 
@@ -18,6 +17,7 @@ public class ItemMapper {
     }
     public ItemDto itemToItemDto(Item item) {
         ItemDto itemDto = new ItemDto();
+        itemDto.setId(item.getId());
         itemDto.setName(item.getName());
         itemDto.setDescription(item.getDescription());
         itemDto.setAvailable(item.getAvailable());
