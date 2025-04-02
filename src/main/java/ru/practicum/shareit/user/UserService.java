@@ -10,12 +10,15 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public User createUser(UserDto user) {
+        return userRepository.save(userMapper.fromDto(user));
     }
 
-    public User updateUser(long id, User user) {
+    public User updateUser(long id, UserDto userDto) {
+
+        User user = userMapper.fromDto(userDto);
 
         return userRepository.findById(id).map(existingUser -> {
             boolean updated = false;
@@ -29,13 +32,14 @@ public class UserService {
                 existingUser.setEmail(user.getEmail());
                 updated = true;
             }
-
             if (updated) {
                 return userRepository.save(existingUser);
             } else {
                 return existingUser;
             }
         }).orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
+
+
     }
 
     public User getUserById(long id) {

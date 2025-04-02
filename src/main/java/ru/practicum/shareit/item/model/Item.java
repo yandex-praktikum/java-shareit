@@ -10,7 +10,7 @@ import ru.practicum.shareit.user.User;
 @Data
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table (name = "items")
+@Table(name = "items")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

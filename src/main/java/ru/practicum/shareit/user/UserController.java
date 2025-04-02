@@ -12,13 +12,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public User createUser(@Valid @RequestBody User user) {
+    public User createUser(@Valid @RequestBody UserDto user) {
         return userService.createUser(user);
     }
 
     @PatchMapping("/{id}")
-    public User updateUser(@PathVariable("id") long id, @Valid @RequestBody User user) {
-        System.out.println(id);
+    public User updateUser(@PathVariable("id") long id, @Valid @RequestBody UserDto user) {
         return userService.updateUser(id, user);
     }
 
