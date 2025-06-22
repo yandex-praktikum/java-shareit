@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 @Builder
 public class UserRequestDto {
-    private Long id;
 
     @NotBlank
     private String name;

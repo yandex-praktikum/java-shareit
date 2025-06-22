@@ -31,12 +31,11 @@ public class UserController {
     @PatchMapping("/{userId}")
     public ResponseEntity<Object> updateUser(@RequestBody UserRequestDto user,
                               @PathVariable(name = "userId") @Positive Long userId) {
-        user.setId(userId);
         return userClient.updateUser(user, userId);
     }
 
     @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable(name = "userId") @Positive Long userId) {
-        userClient.deleteUser(userId);
+    public ResponseEntity<Object> deleteUser(@PathVariable(name = "userId") @Positive Long userId) {
+        return userClient.deleteUser(userId);
     }
 }
