@@ -2,7 +2,195 @@ name: ShareIt API Tests
 
 on:
   pull_request:
+  workflow_call:
 
 jobs:
-  build:
-    uses: yandex-praktikum/java-shareit/.github/workflows/api-tests.yml@ci
+  check-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check repo not fork and public
+        run: |
+          REPO=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "/repos/${GITHUB_REPOSITORY}")
+          FORK=$(jq '.fork' <<< "$REPO")
+          PRIVATE=$(jq '.private' <<< "$REPO")
+          echo "FORK='$FORK', PRIVATE='$PRIVATE', GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER} "
+          if [[ "$FORK" == "true" ]]
+          then
+            echo "Use the repository automatically created by Yandex Practicum (works in fork repositories are not accepted)"
+            echo "Используйте только репозиторий созданный Yandex Practicum, работы в форк репозитории не принимаются"
+            exit -1
+          fi
+          if [[ "$GITHUB_REPOSITORY_OWNER" == "yandex-praktikum" ]]
+          then
+            echo "Use the repository automatically created by Yandex Practicum (works in fork repositories are not accepted)"
+            echo "Используйте только репозиторий созданный Yandex Practicum, работы в форк репозитории не принимаются"
+            exit -2
+          fi
+          if [[ "$PRIVATE" == "true" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+          then
+            echo "Share your repository, make it public"
+            echo "Откройте доступ к вашему репозиторию, сделайте его публичным"
+            exit -3
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Check branch name
+        run: |
+          if [[ "$GITHUB_BASE_REF" != "main" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+          then
+            echo "Set the pull request to merge branch 'main' (instead of '$GITHUB_BASE_REF')"
+            echo "Задайте в Pull request ветку слияния 'main'  (вместо '$GITHUB_BASE_REF')"
+            exit -2
+          fi
+          echo "Github target '$GITHUB_BASE_REF' - OK"
+
+          if [[ "$GITHUB_HEAD_REF" == "add-controllers" ]]
+          then
+            echo "Sprint 14: add-controllers - OK"
+            exit
+          fi
+          if [[ "$GITHUB_HEAD_REF" == "add-bookings" ]]
+          then
+            echo "Sprint 15: add-bookings - OK"
+            PULL=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  /repos/${GITHUB_REPOSITORY}/pulls?head=${GITHUB_REPOSITORY_OWNER}:add-controllers || true)
+            OPEN=$(jq '. | length' <<< "$PULL")
+            if [[ "$OPEN" != "0" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+            then
+              PULL_URL=$(jq '.[0].html_url' <<< "$PULL")
+              echo "Merge the add-controllers branch pull request: ${PULL_URL}"
+              echo "Объедините pull request ветки add-controllers: ${PULL_URL}"
+              exit -3
+            fi
+            echo "Sprint 14: add-controllers - Merged"
+            exit
+          fi
+          if [[ "$GITHUB_HEAD_REF" == "add-item-requests-and-gateway" ]]
+          then
+            echo "Sprint 16: add-item-requests-and-gateway - OK"
+            PULL=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  /repos/${GITHUB_REPOSITORY}/pulls?head=${GITHUB_REPOSITORY_OWNER}:add-bookings || true)
+            OPEN=$(jq '. | length' <<< "$PULL")
+            if [[ "$OPEN" != "0" && "$GITHUB_REPOSITORY_OWNER" != "praktikum-java" ]]
+            then
+              PULL_URL=$(jq '.[0].html_url' <<< "$PULL")
+              echo "Merge the add-bookings branch pull request: ${PULL_URL}"
+              echo "Объедините pull request ветки add-bookings: ${PULL_URL}"
+              exit -4
+            fi
+            echo "Sprint 15: add-bookings - Merged"
+            exit
+          fi
+          echo "Correct branch name '$GITHUB_HEAD_REF' according to the spec, allowed: add-controllers, add-bookings, add-item-requests-and-gateway"
+          echo "Исправьте пожалуйста имя ветки '$GITHUB_HEAD_REF' согласно заданию, разрешены: add-controllers, add-bookings, add-item-requests-and-gateway"
+          exit -1
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Check files
+        run: |
+          PULL=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  /repos/${GITHUB_REPOSITORY}/pulls/${PULL_NUMBER}/files?per_page=100 || true)
+          FILENAMES=$(jq '.[] | .filename' <<< "$PULL")
+          if [[ "$FILENAMES"  =~ "api-tests.yml" ]]
+          then
+            echo "The pull request contains the api-tests.yml file and cannot be modified. Remove it from PR"
+            echo "Pull request содержит файл api-tests.yml, его изменять нельзя. Удалите его из PR"
+            exit -1
+          fi
+          if [[ "$FILENAMES"  =~ "checkstyle.xml" ]]
+          then
+            echo "The pull request contains the checkstyle.xml file and cannot be modified. Remove it from PR"
+            echo "Pull request содержит файл checkstyle.xml, его изменять нельзя. Удалите его из PR"
+            exit -2
+          fi
+          if [[ "$FILENAMES"  =~ ".class" ]] || [[ "$FILENAMES"  =~ ".jar" ]] || [[ "$FILENAMES"  =~ "mvn" ]] || [[ "$FILENAMES"  =~ ".DS_Store" ]] \
+          || [[ "$FILENAMES"  =~ ".idea" ]] || [[ "$FILENAMES"  =~ ".iws" ]] || [[ "$FILENAMES"  =~ ".iml" ]] || [[ "$FILENAMES"  =~ ".ipr" ]] \
+          || [[ "$FILENAMES"  =~ ".db" ]] || [[ "$FILENAMES"  =~ ".log" ]] || [[ "$FILENAMES"  =~ "target/" ]]
+          then
+            echo "The pull request contains the binary files. Remove them (*.class, *.jar, *.DS_Store ...) from PR"
+            echo "Pull request содержит двоичные файлы. Удалите их (*.class, *.jar, *.DS_Store ...) из PR"
+            exit -3
+          fi
+          echo "PR files - OK"
+          exit
+        env:
+          PULL_NUMBER: ${{ github.event.number }}
+          GH_TOKEN: ${{ github.token }}
+
+  build-shareit:
+
+    needs: check-repo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Checkout tests
+        uses: actions/checkout@v4
+        with:
+          repository: 'yandex-praktikum/java-shareit'
+          ref: ${{ github.event.pull_request.head.ref }}
+          path: tests
+
+      - name: Check and Build application
+        run: |
+          chmod a+x ./tests/.github/workflows/build.sh
+          ./tests/.github/workflows/build.sh
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16.x'
+
+      - name: Install newman
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      - name: Run Application
+        run: |
+          chmod a+x ./tests/.github/workflows/run.sh
+          ./tests/.github/workflows/run.sh
+
+      - name: Run POSTMAN tests
+        run: >
+          newman run ./tests/postman/sprint.json 
+          --delay-request 50 -r cli,htmlextra 
+          --verbose --color on --reporter-htmlextra-darkTheme 
+          --reporter-htmlextra-export reports/shareIt.html
+          --reporter-htmlextra-title "Отчет по тестам"
+          --reporter-htmlextra-logs true
+          --reporter-htmlextra-template ./tests/.github/workflows/dashboard-template.hbs
+
+      - name: Compose logs
+        if: ${{ failure() }}
+        run: |
+          if test -f "docker-compose.yml"; then
+            docker compose -f docker-compose.yml ps
+            docker compose -f docker-compose.yml stop
+            docker compose -f docker-compose.yml logs -f gateway >> ./gateway.log || true
+            docker compose -f docker-compose.yml logs -f server >> ./server.log || true
+          fi
+  
+
+      - name: Upload log artifact
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: shareIt_log
+          path: ./*.log
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: postman_tests_report
+          path: reports
