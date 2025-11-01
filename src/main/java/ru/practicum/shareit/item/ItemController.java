@@ -36,6 +36,7 @@ public class ItemController {
         return itemService.createItem(ownerId, itemDto);
     }
 
+
     //просмотр вещи по id
     @GetMapping("/{itemId}")
     public ItemDto getItemById(@Positive @PathVariable Long itemId) {
