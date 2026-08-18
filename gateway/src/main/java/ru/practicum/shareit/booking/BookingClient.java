@@ -14,6 +14,7 @@ import ru.practicum.shareit.booking.dto.BookItemRequestDto;
 import ru.practicum.shareit.booking.dto.BookingState;
 import ru.practicum.shareit.client.BaseClient;
 
+
 @Service
 public class BookingClient extends BaseClient {
     private static final String API_PREFIX = "/bookings";
@@ -44,5 +45,39 @@ public class BookingClient extends BaseClient {
 
     public ResponseEntity<Object> getBooking(long userId, Long bookingId) {
         return get("/" + bookingId, userId);
+    }
+
+    public ResponseEntity<Object> approveBooking(
+            long userId,
+            Long bookingId,
+            boolean approved) {
+
+        Map<String, Object> parameters = Map.of(
+                "approved", approved
+        );
+
+        return patch(
+                "/" + bookingId + "?approved={approved}",
+                userId,
+                parameters,
+                null
+        );
+    }
+
+    public ResponseEntity<Object> getOwnerBookings(
+            long userId,
+            Integer from,
+            Integer size) {
+
+        Map<String, Object> parameters = Map.of(
+                "from", from,
+                "size", size
+        );
+
+        return get(
+                "/owner?from={from}&size={size}",
+                userId,
+                parameters
+        );
     }
 }
